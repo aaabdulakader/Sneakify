@@ -1,16 +1,21 @@
-import logo from "./logo.svg";
-import React, { useState, useEffect } from "react";
-import { ProductList } from "./components";
-
 import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { Home, Header, ProductList } from "./components";
 
 function App() {
+  // states
+  // const [products, setProducts] = React.useState([]);
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Products</h1>
-        <ProductList />
-      </header>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/men" element={<ProductList />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
