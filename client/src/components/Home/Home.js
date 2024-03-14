@@ -4,7 +4,7 @@ import homeStyles from "./Home.module.css";
 
 function Home() {
   return (
-    <div>
+    <div className={homeStyles.container}>
       {/* Home component */}
       <h1 className={homeStyles.title}>Home</h1>
       <p className={homeStyles.text}>

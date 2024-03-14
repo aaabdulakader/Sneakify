@@ -33,6 +33,7 @@ const usersSchem = mongoose.Schema({
       message: "passwords not matching!",
     },
   },
+  passwordChangedAt: Date,
 
   firstName: {
     type: String,
@@ -59,6 +60,15 @@ usersSchem.pre("save", async function (next) {
 
   next();
 });
+
+// set passwordChangedAt
+usersSchem.pre("save", function (next) {
+  !this.isModified("password") || this.isNew
+    ? next()
+    : (this.passwordChangedAt = Date.now() - 1000); // 1 second earlier
+  next();
+});
+
 
 const User = mongoose.model("User", usersSchem);
 
