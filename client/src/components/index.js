@@ -13,7 +13,6 @@ export { default as ProductThumbnail } from "./ProductThumbnail/ProductThumbnail
 export { default as Reviews } from "./Reviews/Reviews.js";
 export { default as Breadcrumb } from "./Breadcrumb/Breadcrumb.js";
 export { default as Login } from "./Login/Login.js";
-export { default as SignUpForm } from "./SignUpForm/SignUpForm.js";
 export { default as AddressForm } from "./AddressForm/AddressForm.js";
 export { default as PaymentForm } from "./PaymentForm/PaymentForm.js";
 export { default as ContactForm } from "./ContactForm/ContactForm.js";
@@ -23,3 +22,10 @@ export { default as Home } from "./Home/Home.js";
 export { default as Hero } from "./Hero/Hero.js";
 export { default as SortBy } from "./SortBy/SortBy.js";
 export { default as MobileNav } from "./MobileNav/MobileNav.js";
+export { default as ProfileDropdown } from "./ProfileDropdown/ProfileDropdown.js";
+export { default as Account } from "./Account/Account.js";
+export { default as UserInfo } from "./UserInfo/UserInfo.js";
+export { default as Favorites } from "./Favorites/Favorites.js";
+export { default as Orders } from "./Orders/Orders.js";
+export { default as AccountSidebar } from "./AccountSidebar/AccountSidebar.js";
+export { default as Signup } from "./Signup/Signup.js";

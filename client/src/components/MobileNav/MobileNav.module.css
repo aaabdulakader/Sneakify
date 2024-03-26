@@ -18,8 +18,16 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 100%;
-  z-index: 100;
+  z-index: 2;
+  margin-top: -100px;
+  animation: slide-bottom 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  /* transform: translateY(-100%);
+  transition: all 0.3s ease; */
 }
+
+/* .mobileNav.active {
+  transform: translateY(0);
+} */
 
 .mobileNav a {
   text-decoration: none;
@@ -59,4 +67,41 @@ li {
 
 .menuIconClose {
   display: none;
+}
+
+/* media */
+
+@media (min-width: 768px) {
+  .mobileNav {
+    display: none;
+  }
+}
+
+/* animations */
+
+/* .slide-bottom {
+  -webkit-animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+} */
+
+@-webkit-keyframes slide-bottom {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+}
+
+@keyframes slide-bottom {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
 }

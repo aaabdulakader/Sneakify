@@ -5,8 +5,9 @@
   align-items: center;
   padding: 10px 40px;
   border-bottom: 1px solid #e0e0e0;
-  /* position: fixed;
-  top: 0;
+  z-index: 100;
+  /* position: fixed; */
+  /* top: 0;
   left: 0;
   right: 0; */
 }
@@ -33,6 +34,7 @@ a {
 .nav {
   display: flex;
   align-items: center;
+  z-index: 100;
 }
 
 .navList {
@@ -138,5 +140,9 @@ a {
   .menuIconClose {
     display: block;
     visibility: visible;
+  }
+
+  .profileIcon {
+    display: none;
   }
 }

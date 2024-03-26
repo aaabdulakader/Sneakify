@@ -5,16 +5,17 @@ const jwt = require("jsonwebtoken");
 const { parse } = require("path");
 const dotenv = require("dotenv");
 const { promisify } = require("util");
+// const { stringify } = require("braces");
 
 dotenv.config({ path: `${__dirname}/../config.env` });
 
 const signUp = async (req, res, next) => {
   try {
     const newUser = await User.create({
-      username: req.body.username,
-      email: req.body.email,
+      // username: req.body.username,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      email: req.body.email,
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
     });
@@ -29,13 +30,13 @@ const signUp = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  const user = await User.findOne({ username: req.body.username }).select(
+  const user = await User.findOne({ email: req.body.email }).select(
     "+password"
   );
 
   console.log(user);
 
-  if (!req.body.password || !req.body.username)
+  if (!req.body.password || !req.body.email)
     return next("Please enter username and password");
 
   if (!user || !(await bycrypt.compare(req.body.password, user.password)))
@@ -45,7 +46,6 @@ const login = async (req, res, next) => {
 
 const secure = async (req, res, next) => {
   let token;
-
   // req.headers.authorization &&
   //   req.headers.authorization.startsWith("Bearer") &&
   //   (token = req.headers.authorization.split(" ")[1]);
@@ -94,37 +94,37 @@ const createToken = (id) => {
 const sendToken = (user, statusCode, res) => {
   const token = createToken(user._id);
 
-  // res.cookie("jwt", token, {
+  // console.log(process.env.COOKIE_EXPIRES_IN);
+  const isProduction = process.env.NODE_ENV === "production";
+
+  // const cookieOptions = {
   //   httpOnly: true,
-  //   expires: new Date(
-  //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-  //   ),
-  //   secure: process.env.NODE_ENV === "production",
-  // });
+  //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // Example: 1 day
+  //   sameSite: isProduction ? "None" : "Lax",
+  //   secure: isProduction,
+  //   path: "/",
+  // };
+  // console.log(cookieData, "cookieData");
 
-  console.log(process.env.COOKIE_EXPIRES_IN);
-
-  const cookieData = {
-    expires: new Date(
-      Date.now() + process.env.COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-    secure: process.env.NODE_ENV === "production",
-    httpOnly: true,
-  };
-
-  console.log(cookieData, "cookieData");
-
-  res.cookie("jwt", token, cookieData);
+  // res.cookie("jwt", token, cookieOptions);
 
   user.password = undefined;
 
   res.status(statusCode).json({
     status: "success",
     token,
-    tokenExpiresIn: process.env.JWT_EXPIRES_IN,
+    // 90 days in the future
+    tokenExpiresIn: 10,
+    // Date.now() + process.env.JWT_EXPIRES_IN * 24 * 60 * 60 * 1000,
+
     data: {
       user,
     },
+    // headers: {
+    //   "Set-Cookie": `jwt=${token}; expires=${cookieOptions.expires.toUTCString()}; path=/; ${
+    //     isProduction ? "SameSite=None; Secure" : ""
+    //   }`,
+    // },
   });
 };
 

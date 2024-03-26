@@ -3,11 +3,11 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
 const usersSchem = mongoose.Schema({
-  username: {
-    type: String,
-    unique: [true, "username already exists"],
-    required: [true, "username required"],
-  },
+  // username: {
+  type: String,
+  // unique: [true, "username already exists"],
+  // required: [true, "username required"],
+  // },
   email: {
     type: String,
     required: [true, "Email required"],
@@ -68,7 +68,6 @@ usersSchem.pre("save", function (next) {
     : (this.passwordChangedAt = Date.now() - 1000); // 1 second earlier
   next();
 });
-
 
 const User = mongoose.model("User", usersSchem);
 

@@ -1,0 +1,47 @@
+/* Account component styles */
+/* Account.module.css */
+
+.account {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.sidebar {
+  flex: 1;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar ul li a:hover {
+  color: #007bff;
+}
+
+.content {
+  flex: 3;
+  padding: 20px;
+}
+
+.content h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.content p {
+  margin-bottom: 10px;
+  color: #666;
+}
