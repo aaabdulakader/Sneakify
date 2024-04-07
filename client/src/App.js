@@ -8,6 +8,8 @@ import {
   Login,
   Account,
   Signup,
+  ProductDetail,
+  Cart,
   // Sidebar,
 } from "./components/index.js";
 
@@ -42,6 +44,8 @@ const checkTokenExpiration = () => {
 // checkTokenExpiration();
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([{}]);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -73,14 +77,23 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header isLoggedIn={isLoggedIn} logout={logout} />
-        <p className="cookie">
+        <Header
+          isLoggedIn={isLoggedIn}
+          logout={logout}
+          setCart={setCart}
+          cart={cart}
+        />
+        {/* <p className="cookie">
           {getCookie("jwt") ? "JWT Token found" : "JWT Token not found"}
-        </p>
+        </p> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/products" element={<ProductList />} />
-          <Route exact path="/men" element={<ProductList />} />
+          <Route exact path="/men" element={<ProductList gender="men" />} />
+          <Route exact path="/women" element={<ProductList gender="women" />} />
+          <Route exact path="/kids" element={<ProductList gender="kids" />} />
+          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/products/:slug" element={<ProductDetail />} />
           {/* cart */}
           <Route exact path="/cart" element={""} />
           <Route

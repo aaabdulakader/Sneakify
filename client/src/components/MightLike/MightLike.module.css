@@ -1,0 +1,34 @@
+/* MightLike component styles */
+
+.mightLike {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+  /* overflow-x: scroll; */
+}
+
+.mightLikeTitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.mightLikeProducts {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); */
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  overflow-x: scroll;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.mightLikeProducts > div {
+  min-width: 400px;
+  /* height: 400px; */
+}

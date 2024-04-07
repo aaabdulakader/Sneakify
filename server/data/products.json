@@ -5,8 +5,7 @@
     "subTitle": "Shoes",
     "brand": "Nike",
     "category": "Sneakers",
-    "brand": "Nike",
-    "category": "Sneakers",
+    "rating": 4.5,
 
     "sizes": [
       "7",
@@ -24,26 +23,24 @@
       "13"
     ],
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7",
-      "image-8",
-      "image-9"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/37c110f4-39e4-4831-9729-abb725257f77/air-jordan-1-element-shoes-Kcsdzl.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/15f0c2a2-c6a4-47c8-93df-cd66edabe503/air-jordan-1-element-shoes-Kcsdzl.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/74df734b-cce3-4464-baf9-9ff7ff6183d4/air-jordan-1-element-shoes-Kcsdzl.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/02f8e2d6-33bb-46c6-94ce-48ee72354106/air-jordan-1-element-shoes-Kcsdzl.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/90618139-bc70-4b27-98ca-bdde4600eed7/air-jordan-1-element-shoes-Kcsdzl.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/c6594a24-0cae-487c-a75f-76a8d282d6c8/air-jordan-1-element-shoes-Kcsdzl.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/b4b04a5d-6e62-4c59-aaef-43fb30c6955b/air-jordan-1-element-shoes-Kcsdzl.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/7480ea59-efa9-4adf-8b1b-c6c0199f0e04/air-jordan-1-element-shoes-Kcsdzl.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/2d7399cc-2f4b-412e-a31c-46886bad661f/air-jordan-1-element-shoes-Kcsdzl.png"
     ]
   },
   {
     "title": "Air Jordan 1 High Method of Make",
     "price": 155,
-    "subTitle": "Women's Shoes",
+    "subTitle": "Women",
     "brand": "Nike",
     "category": "Sneakers",
-    "brand": "Nike",
-    "category": "Sneakers",
+    "rating": 4,
     "sizes": [
       "5",
       "5.5",
@@ -60,23 +57,24 @@
       "11"
     ],
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7",
-      "image-8"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/63a88dde-8fcc-4f2d-8bb5-c83bb58b0ccf/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/6b9d94ab-5383-4f75-a7f4-fdc320adca05/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/000385ee-5643-4df0-9910-a61636a58d13/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/bb544452-ff7e-4533-9446-5c5a4147fcd5/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/29fd91fe-c924-4b02-bc85-6e263af5eba8/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/31dc6fbc-3a71-4603-a0a4-9c519211d44d/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/07a07dbc-b3f8-4123-9b11-3c6f107db577/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/5f25e392-6432-47e6-88fa-402fa3264530/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/db20646e-fea4-4d39-9cf0-d8e4cfae0e6f/air-jordan-1-high-method-of-make-womens-shoes-hCCcBh.png"
     ]
   },
   {
     "title": "Air Jordan 1 Mid SE",
     "price": 135,
-    "subTitle": "Women's Shoes",
+    "subTitle": "Women",
     "brand": "Nike",
     "category": "Sneakers",
+    "rating": 4.2,
     "sizes": [
       "5",
       "5.5",
@@ -93,22 +91,23 @@
       "11"
     ],
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/d7b6e54a-a132-4d90-8a81-f94c73bccd1f/air-jordan-1-mid-se-womens-shoes-wkMdft.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/1916635b-2543-47ac-b5fc-936bfc34d595/air-jordan-1-mid-se-womens-shoes-wkMdft.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/bdb2d48e-00e9-4675-a98a-e7188d028107/air-jordan-1-mid-se-womens-shoes-wkMdft.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/92f7d7be-300b-41a7-943d-e1f1df9e353b/air-jordan-1-mid-se-womens-shoes-wkMdft.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/13fd312e-7709-472a-b2eb-3f443e2bc189/air-jordan-1-mid-se-womens-shoes-wkMdft.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/a01efa18-6551-4eca-89e1-55d7e471a44f/air-jordan-1-mid-se-womens-shoes-wkMdft.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/08594e11-5753-43c3-9cf9-a21c78035134/air-jordan-1-mid-se-womens-shoes-wkMdft.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/72431dda-6392-4b13-8719-ac464a93f255/air-jordan-1-mid-se-womens-shoes-wkMdft.png"
     ]
   },
   {
     "title": "Air Jordan 1 Zoom CMFT 2",
     "price": 150,
-    "subTitle": "Men's Shoes",
+    "subTitle": "Men",
     "brand": "Nike",
     "category": "Sneakers",
+    "rating": 4.1,
     "sizes": [
       "7",
       "7.5",
@@ -125,22 +124,23 @@
       "13"
     ],
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/03722903-962f-44d9-bb69-a95c35c0ed1b/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/2b1884aa-95f4-4b8c-9814-dbf34a529c73/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/e0c05863-338b-47fd-b9d2-88e708f4286b/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0b2ddfb6-c1f9-40a2-9b11-911df90df612/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/dca03476-2343-49cc-ac02-aaa5f56e1d6c/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/7c36f7c2-f62d-47eb-8a2a-13e373a44760/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/cb646a50-2f5f-49eb-a2b2-c78d163400f8/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/94d0ce7e-ae5e-4fba-b40e-1ae6fdf7fe5c/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png"
     ]
   },
   {
-    "title": "Air Jordan 3 Retro Craft \"Ivory\"",
+    "title": "Air Jordan 3 Retro Craft 'Ivory' ",
     "price": 210,
-    "subTitle": "Men's Shoes",
+    "subTitle": "Men",
     "brand": "Nike",
     "category": "Sneakers",
+    "rating": 4.6,
     "sizes": [
       "7",
       "7.5",
@@ -157,24 +157,25 @@
       "13"
     ],
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7",
-      "image-8",
-      "image-9"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/196ac49c-9b28-42d0-8538-0c1b8352d358/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/f9674acc-236e-4865-913a-bf6f11053d9e/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/5038cd86-ed85-4c90-aefe-096e7632d70f/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/7332924f-3145-414d-96a2-ba02cee4595d/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/d484c20c-9dd1-45b9-9a73-7a2b4aee743b/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/6204cf92-f776-43a7-9424-450df680a9aa/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/f5effa92-d594-4be5-9cf4-0030dc105f6c/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/c06ad219-0b24-48ff-bfac-1a5517d9c78b/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/97c0bf04-95cb-450a-9bd6-a52a433838bb/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/6dde8312-fa9c-4101-bd69-12cdc2670776/air-jordan-3-retro-craft-ivory-mens-shoes-R60dgp.png"
     ]
   },
   {
     "title": "Nike Air Flight Huarache",
     "price": 125,
-    "subTitle": "Men's Shoes",
+    "subTitle": "Men",
     "brand": "Nike",
     "category": "Sneakers",
+    "rating": 5,
     "sizes": [
       "7",
       "7.5",
@@ -191,22 +192,23 @@
       "13"
     ],
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cd50f25f-04d5-4d37-88a2-9d89cfc4f472/air-flight-huarache-mens-shoes-8Kcnt5.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/e84f0d2c-be8a-430c-b601-a800bbf80576/air-flight-huarache-mens-shoes-8Kcnt5.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/95adf34e-150c-4e7d-beea-35460d284fd3/air-flight-huarache-mens-shoes-8Kcnt5.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/408828ea-c096-43e5-b6d5-937cbd98527c/air-flight-huarache-mens-shoes-8Kcnt5.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/9b5c033c-553c-4a35-b990-d4a9dc7a5416/air-flight-huarache-mens-shoes-8Kcnt5.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/bb500243-751e-48a1-ba10-7730ff42f804/air-flight-huarache-mens-shoes-8Kcnt5.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/092d2972-46dc-4a61-bf9b-01e2afcb61eb/air-flight-huarache-mens-shoes-8Kcnt5.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/5d593c23-cb9d-41eb-999f-d98c77481f58/air-flight-huarache-mens-shoes-8Kcnt5.png"
     ]
   },
   {
     "title": "Nike Air More Uptempo '96",
     "price": 180,
-    "subTitle": "Men's Shoes",
+    "subTitle": "Men",
     "brand": "Nike",
     "category": "Sneakers",
+    "rating": 4.8,
     "sizes": [
       "7",
       "7.5",
@@ -224,22 +226,23 @@
     ],
 
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/a7fad3a2-f51d-4004-8349-f95f3538d756/air-more-uptempo-96-mens-shoes-zpkSSs.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/9fdaf588-2d76-4c76-9432-fdaa7498b548/air-more-uptempo-96-mens-shoes-zpkSSs.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/e065ff16-313b-41b0-b9be-2fb3ae82980f/air-more-uptempo-96-mens-shoes-zpkSSs.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/f9329b39-e175-481c-9404-bb871a9d743a/air-more-uptempo-96-mens-shoes-zpkSSs.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/217d22e2-80cb-4729-b97a-58a366be979b/air-more-uptempo-96-mens-shoes-zpkSSs.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/aec7ec2c-b091-4b17-acc7-9d315402e96e/air-more-uptempo-96-mens-shoes-zpkSSs.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/cc1ee3e9-c91b-412e-aae1-93dc4dfd8d57/air-more-uptempo-96-mens-shoes-zpkSSs.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/18bcc2ea-4f73-4cd5-b317-2d4f27e47f4e/air-more-uptempo-96-mens-shoes-zpkSSs.png"
     ]
   },
   {
     "title": "Nike Dunk Low Retro",
     "price": 115,
-    "subTitle": "Men's Shoes",
+    "subTitle": "Men",
     "brand": "Nike",
     "category": "Sneakers",
+    "rating": 4.5,
     "sizes": [
       "7",
       "7.5",
@@ -256,23 +259,25 @@
       "13"
     ],
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7",
-      "image-8"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b1bcbca4-e853-4df7-b329-5be3c61ee057/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/e863ca32-5f23-49eb-9ee6-da62958650f9/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/2c25c676-832d-453f-9cd9-dd6b492d7636/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/30ed2748-cf6a-4697-a59f-105bbc4de8dc/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/2f7301c8-1550-4207-8360-0490266cf821/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b8083f2f-0933-4c11-9438-5497d751ce62/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ebd299fe-f5b4-45c6-9bf5-88bce1dc9878/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b64e38ae-4c2b-446d-9378-d100a190f847/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ff34d958-eebb-44b0-b5b8-1f2e6cc9a7ae/dunk-low-retro-mens-shoes-5FQWGR.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c3dc0063-c5e8-49c3-9934-63315cdbfe21/dunk-low-retro-mens-shoes-5FQWGR.png"
     ]
   },
   {
     "title": "Nike Zoom Vomero 5",
     "price": 160,
-    "subTitle": "Men's Shoes",
+    "subTitle": "Women",
     "brand": "Nike",
     "category": "Sneakers",
+    "rating": 4.7,
     "sizes": [
       "7",
       "7.5",
@@ -289,18 +294,66 @@
       "13"
     ],
     "images": [
-      "image-0",
-      "image-1",
-      "image-2",
-      "image-3",
-      "image-4",
-      "image-5",
-      "image-6",
-      "image-7",
-      "image-8",
-      "image-9",
-      "image-10",
-      "image-11"
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/bf3d8a3b-5bf3-48fe-92b2-fee50b7f6ce5/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/1a4a39e6-da3a-4854-9c42-903f0fd0c824/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/8a503125-fd65-4d97-a035-bb1d30971da0/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/50248776-9f68-4d9a-927f-43abb0730068/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/aaa62c5a-7005-49b7-9973-319f4f2a87d9/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c3a83e88-c5dc-4d55-ae39-25f0f14599d5/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7147eaba-ea95-4bb2-916d-36cccb21ebe7/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/dcfb1c23-ee07-4013-ac62-108eada0ea10/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/59f4a42c-ff57-4877-ba90-9e06cc0fe2bf/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d70f0091-28a1-4ba2-bbcc-51220c1a74e3/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/22756df7-64d3-459f-afbf-2fe9d0003085/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/464d3ec5-a6da-4a18-a371-fb572bcd7f39/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/3a035051-a4e3-49ec-ae0b-4998489f2acc/zoom-vomero-5-womens-shoes-81TPKW.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/5c08a9c9-1338-4c47-b852-fb3be00723d1/zoom-vomero-5-womens-shoes-81TPKW.png"
+    ]
+  },
+
+  {
+    "title": "Nike Air Force 1",
+    "subTitle": "Kids",
+    "price": 90,
+    "brand": "Nike",
+    "category": "Sneakers",
+    "rating": 4.9,
+    "images": [
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c924bcb3-4624-49d3-a76e-3cfb318f167a/air-force-1-big-kids-shoes-TlVXsf.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/55afce93-183e-4260-bac4-8984ce819dfa/air-force-1-big-kids-shoes-TlVXsf.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/094fc12d-95e1-4e95-854a-c472d6d62c61/air-force-1-big-kids-shoes-TlVXsf.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/0b104ac8-15aa-411e-b670-421fd9c2d28e/air-force-1-big-kids-shoes-TlVXsf.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b0bf1dfc-cb3e-4c75-a2d3-2cde13ae0958/air-force-1-big-kids-shoes-TlVXsf.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/932234aa-256e-472a-962e-2dece64c22b2/air-force-1-big-kids-shoes-TlVXsf.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4f8f4c7c-d2c1-4b30-936a-1c4a0357711d/air-force-1-big-kids-shoes-TlVXsf.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/bc3379f1-fadd-473e-8273-dd130d97a3e8/air-force-1-big-kids-shoes-TlVXsf.png"
+    ],
+    "sizes": [
+      "3.5Y",
+      "4Y",
+      "4.5Y",
+      "5Y",
+      "5.5Y",
+      "6Y",
+      "6.5Y",
+      "7Y",
+      "7.5Y",
+      "8Y",
+      "8.5Y",
+      "9Y",
+      "9.5Y",
+      "10Y",
+      "10.5Y",
+      "11Y",
+      "11.5Y",
+      "12Y",
+      "12.5Y",
+      "13Y",
+      "13.5Y",
+      "1Y",
+      "1.5Y",
+      "2Y",
+      "2.5Y"
     ]
   }
 ]

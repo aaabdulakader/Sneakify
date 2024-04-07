@@ -19,6 +19,15 @@ function Header({ logout }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
 
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  const count = cart?.reduce((acc, item) => {
+    return acc + item.quantity;
+  }, 0);
+
+  // const count = cart
+
+  console.log(count);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -113,6 +122,9 @@ function Header({ logout }) {
 
         <Link className={headerStyles.cartIcon} to="/cart" area-label="Cart">
           <BsCart3 className={headerStyles.cartLogo} />
+          {count !== 0 && (
+            <span className={headerStyles.cartCount}>{count}</span>
+          )}
         </Link>
 
         {isMobileMenuOpen ? (

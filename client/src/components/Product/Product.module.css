@@ -18,7 +18,7 @@
   transition: all 0.3s ease;
   cursor: pointer;
   width: 100%;
-  height: 450px;
+  height: 500px;
   text-align: left;
   animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 
@@ -43,8 +43,6 @@
 
 .productCard img:hover {
   /* background-color: rgba(0, 0, 0, 0.5); */
-  transition: all 0.3s ease;
-  opacity: 0.6;
 }
 
 .productInfo {

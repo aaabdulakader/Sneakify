@@ -61,55 +61,61 @@ function LoginForm({ setTokenAndUser }) {
 
   return (
     <div className={loginFormStyles.container}>
-      <form className={loginFormStyles.form} onSubmit={handleLogin}>
-        {/* <Link to="/" area-label="Home">
+      <div className={loginFormStyles.loginContainer}>
+        <form className={loginFormStyles.form} onSubmit={handleLogin}>
+          {/* <Link to="/" area-label="Home">
           <GiRunningShoe className={loginFormStyles.logo} />
         </Link> */}
-        <h2 className={loginFormStyles.formTitle}>Login</h2>
-        <div className={loginFormStyles.inputContainer}>
-          <label htmlFor="email">Email</label>
-          <input
-            className={loginFormStyles.input}
-            type="text"
-            id="email"
-            name="email"
-            // value="user@example.com"
-            placeholder="example@gmail.com"
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete={"on"}
-            autoFocus={true}
-            // required
-          />
+          <h2 className={loginFormStyles.formTitle}>Login</h2>
+          <div className={loginFormStyles.inputContainer}>
+            <label htmlFor="email"
+              className={loginFormStyles.inputlabel}
+            
+            >Email</label>
+            <input
+              className={loginFormStyles.input}
+              type="text"
+              id="email"
+              name="email"
+              // value="user@example.com"
+              placeholder="example@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete={"on"}
+              autoFocus={true}
+              // required
+            />
+          </div>
+          <div className={loginFormStyles.inputContainer}>
+            <label htmlFor="password" className={loginFormStyles.inputlabel}>
+              Password
+            </label>
+            <input
+              className={loginFormStyles.input}
+              type="password"
+              id="password"
+              name="password"
+              // value="password1"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="on"
+              // required
+            />
+          </div>
+          {/* Forgot Password and Signup Links */}
+
+          <button type="submit" className={loginFormStyles.submitButton}>
+            Login
+          </button>
+        </form>
+
+        <div className={loginFormStyles.signupContainer}>
+          <p>Don't have an account?</p>
+          <Link to="/signup" className={loginFormStyles.signupLink}>
+            Sign Up
+          </Link>
         </div>
-        <div className={loginFormStyles.inputContainer}>
-          <label htmlFor="password">Password</label>
-          <input
-            className={loginFormStyles.input}
-            type="password"
-            id="password"
-            name="password"
-            // value="password1"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="on"
-            // required
-          />
-        </div>
-        {/* Forgot Password and Signup Links */}
 
-        <button type="submit" className={loginFormStyles.submitButton}>
-          Login
-        </button>
-      </form>
-
-      <div className={loginFormStyles.signupContainer}>
-        <p>Don't have an account?</p>
-        <Link to="/signup" className={loginFormStyles.signupLink}>
-          Sign Up
-        </Link>
-      </div>
-
-      {/* <div className={loginFormStyles.forgotPasswordContainer}>
+        {/* <div className={loginFormStyles.forgotPasswordContainer}>
         <Link
           to="/forgotpassword"
           className={loginFormStyles.forgotPasswordLink}
@@ -117,6 +123,7 @@ function LoginForm({ setTokenAndUser }) {
           Forgot Password?
         </Link>
       </div> */}
+      </div>
     </div>
   );
 }

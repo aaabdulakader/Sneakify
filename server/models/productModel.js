@@ -40,9 +40,10 @@ const productSchema = new mongoose.Schema({
       review: String,
     },
   ],
+  rating: Number,
   images: [String],
   createdAt: { type: Date, default: Date.now },
-  SKU: String,
+  slug: String,
   quantity: {
     type: Number,
 
@@ -69,9 +70,10 @@ productSchema.pre("save", function (next) {
   next();
 });
 
-// generate SKU before saving
+// generate slug before saving
 productSchema.pre("save", function (next) {
-  this.SKU = `${this.category}-${this.title.split(" ").join("-")}`;
+  // delete ending and start spaces
+  this.slug = `${this.category}-${this.title.trim().replace(/ /g, "-")}`;
   next();
 });
 const Product = mongoose.model("Product", productSchema);

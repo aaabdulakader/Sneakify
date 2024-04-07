@@ -49,8 +49,8 @@ function Signup({ setTokenAndUser }) {
   };
 
   return (
-    <div className={styles.signup}>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div className={styles.signup}>
         <form className={styles.form} onSubmit={handleSignup}>
           {/* <Link to="/" area-label="Home">
           <GiRunningShoe className={signupStyles.logo} />

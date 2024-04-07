@@ -1,27 +1,60 @@
 import { React, useState, useEffect } from "react";
-import { SortBy, Product } from "../index";
+import { Product } from "../index";
 import { IoFilterOutline } from "react-icons/io5";
+import { FaSort } from "react-icons/fa6";
+// import { useHistory } from "react-router-dom";
 
 import styles from "./ProductList.module.css";
 // import ProductList from "../../../../clientt/src/components/ProductList/ProductList";
 
-function ProductList() {
+function ProductList({ gender }) {
   const [products, setProducts] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [category, setCategory] = useState([]);
+  const [size, setSize] = useState([]);
+  const [price, setPrice] = useState([]);
+  const [color, setColor] = useState([]);
+
+  // const [gender, setGender] = useState("");
+
+  // loading blur effect
+  const productList = document.querySelector(".productList");
+  console.log(productList);
 
   const link = "http://localhost:9000/products/";
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [gender]);
 
   const fetchProducts = async (limit) => {
-    await fetch(link + (limit ? `?limit=${limit}` : ""))
+    return await fetch(link + (limit ? `?limit=${limit}` : ""))
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.documents);
       });
   };
+
+  // useEffect(() => {
+  //   if (gender) {
+  //     fetchProducts(); // Fetch all products
+  //   }
+  // }, [gender]);
+
+  // if gender is passed as a prop, filter products
+  // if gender is passed as a prop, filter products
+  useEffect(() => {
+    if (gender) {
+      setProducts((products) =>
+        products.filter((product) =>
+          product.subTitle.toLowerCase().includes(gender.toLowerCase())
+        )
+      );
+    } else {
+      fetchProducts();
+    }
+  }, [gender]);
 
   console.log(products);
 
@@ -33,17 +66,58 @@ function ProductList() {
   const handleFilter = () => {
     setShowFilter(!showFilter);
   };
+  const handleSortChange = (e) => {
+    // Show loading indicator
+    setLoading(true);
+
+    if (e.target.value === "price-low-to-high") {
+      const sortedProducts = [...products].sort((a, b) => a.price - b.price);
+      setProducts(sortedProducts);
+    } else if (e.target.value === "price-high-to-low") {
+      const sortedProducts = [...products].sort((a, b) => b.price - a.price);
+      setProducts(sortedProducts);
+    } else if (e.target.value === "newest") {
+      const sortedProducts = [...products].sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      setProducts(sortedProducts);
+    }
+
+    // Hide loading indicator after updating products
+    setLoading(false);
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, checked } = e.target;
+
+    // if (checked
+  };
 
   return (
-    <div>
-      {/* <SortBy /> */}
-
+    <div className={styles.container}>
       {/* Filter By button */}
-      <div className={styles.filterByContainer} onClick={handleFilter}>
-        {<IoFilterOutline className={styles.filterByIcon} />}
-        <button className={styles.filterByButton}>Filter</button>
+      {/* wrapper for filter and sort */}
+      <div className={styles.wrapper}>
+        <div className={styles.filterByContainer} onClick={handleFilter}>
+          {/* {<IoFilterOutline className={styles.filterByIcon} />} */}
+          <button className={styles.filterByButton}>Filter</button>
+        </div>
+
+        {/* Sort by dropdown */}
+        <div className={styles.sortByContainer}>
+          Sort By:
+          {/* {<FaSort className={styles.sortByIcon} />} */}
+          <select className={styles.sortBySelect} onChange={handleSortChange}>
+            <option value="newest">Newest</option>
+            <option value="price-low-to-high">Price: Low-High</option>
+            <option value="price-high-to-low">Price: High-low</option>
+          </select>
+        </div>
       </div>
-      <div className={styles.productList}>
+      <div
+        className={`${styles.productList} ${loading ? styles.loading : ""}`}
+        id="productList"
+      >
         <div
           className={
             styles.filterOptions + " " + (showFilter ? styles.show : "")
@@ -58,15 +132,30 @@ function ProductList() {
             {/* Category options */}
             <div className={styles.categoryOptions}>
               <div className={styles.checkboxContainer}>
-                <input type="checkbox" id="men" name="men"></input>
+                <input
+                  type="checkbox"
+                  id="men"
+                  name="men"
+                  onChange={handleFilterChange}
+                ></input>
                 <label htmlFor="men">Men</label>
               </div>
               <div className={styles.checkboxContainer}>
-                <input type="checkbox" id="women" name="women"></input>
+                <input
+                  type="checkbox"
+                  id="women"
+                  name="women"
+                  onChange={handleFilterChange}
+                ></input>
                 <label htmlFor="women">Women</label>
               </div>
               <div className={styles.checkboxContainer}>
-                <input type="checkbox" id="kids" name="kids"></input>
+                <input
+                  type="checkbox"
+                  id="kids"
+                  name="kids"
+                  onChange={handleFilterChange}
+                ></input>
                 <label htmlFor="kids">Kids</label>
               </div>
             </div>
@@ -227,9 +316,13 @@ function ProductList() {
           </div>
         </div>
 
-        {products.map((product) => {
-          return <Product product={product} key={product._id} />;
-        })}
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          products.map((product) => {
+            return <Product product={product} key={product._id} />;
+          })
+        )}
       </div>
 
       {/* show more button */}
