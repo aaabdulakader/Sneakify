@@ -9,6 +9,7 @@ import styles from "./ProductList.module.css";
 
 function ProductList({ gender }) {
   const [products, setProducts] = useState([]);
+  //   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState([]);
@@ -32,31 +33,30 @@ function ProductList({ gender }) {
     return await fetch(link + (limit ? `?limit=${limit}` : ""))
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.documents);
+        const allProducts = data.documents;
+
+        if (gender) {
+          const filteredProducts = allProducts.filter((product) =>
+            product.subTitle.toLowerCase().includes(gender.toLowerCase())
+          );
+          setProducts(filteredProducts);
+        } else {
+          setProducts(allProducts);
+        }
       });
   };
-
-  // useEffect(() => {
-  //   if (gender) {
-  //     fetchProducts(); // Fetch all products
-  //   }
-  // }, [gender]);
-
   // if gender is passed as a prop, filter products
-  // if gender is passed as a prop, filter products
-  useEffect(() => {
-    if (gender) {
-      setProducts((products) =>
-        products.filter((product) =>
-          product.subTitle.toLowerCase().includes(gender.toLowerCase())
-        )
-      );
-    } else {
-      fetchProducts();
-    }
-  }, [gender]);
-
-  console.log(products);
+  //   useEffect(() => {
+  //     if (gender) {
+  //       setFilteredProducts((products) =>
+  //         products.filter((product) =>
+  //           product.subTitle.toLowerCase().includes(gender.toLowerCase())
+  //         )
+  //       );
+  //     } else {
+  //       fetchProducts();
+  //     }
+  //   }, [gender]);
 
   const handleShowMore = () => {
     // Fetch more products
@@ -320,7 +320,7 @@ function ProductList({ gender }) {
           <p>Loading...</p>
         ) : (
           products.map((product) => {
-            return <Product product={product} key={product._id} />;
+            return <Product key={product._id} product={product} />;
           })
         )}
       </div>

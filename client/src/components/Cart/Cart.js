@@ -45,7 +45,9 @@ const CartItem = ({ item, handleRemove, handleAddAndminus }) => {
           <p className={styles.price}>${item.price}</p>
           <AiOutlineDelete
             className={styles.remove}
-            onClick={() => handleRemove(item._id, item.selectedSize, true)}
+            onClick={() => {
+              handleRemove(item._id, item.selectedSize, true);
+            }}
           />
         </div>
       </div>
@@ -56,10 +58,44 @@ const CartItem = ({ item, handleRemove, handleAddAndminus }) => {
 function Cart() {
   const [cartitems, setCartItems] = useState([]);
 
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  let link;
+  if (user) {
+    link = `http://localhost:9000/users/${user._id}/cart`;
+  }
+
+  // get cart items from server
+  const getCartItems = async () => {
+    if (!user) return;
+    const response = await fetch(link);
+    const data = await response.json();
+    setCartItems(data.cart.items);
+  };
+
+  useEffect(() => {
+    getCartItems();
+  }, []);
+
+  //   console.log(cartitems);
   const subtotal = cartitems?.reduce((acc, item) => {
     return acc + item.price * item.quantity;
   }, 0);
 
+  //   if (!localStorage.getItem("currentUser")) {
+  //     window.location.href = "/login";
+  //   }
+
+  const request = async (method, url, data) => {
+    const response = await fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    return response.json();
+  };
   const handleRemove = (id, size, deleteButton = false) => {
     let newCart;
     if (deleteButton) {
@@ -79,33 +115,37 @@ function Cart() {
       );
     }
 
-    setTimeout(() => {
-      setCartItems(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-      // window.location.reload();
-    }, 1000);
+    //   post request to update cart
+    request("PATCH", link, { user, items: newCart }).then((data) => {
+      setCartItems(data.cart.items);
+    });
   };
 
   const handleAddAndminus = (id, type, size) => {
-    const newCart = cartitems.map((item) => {
+    let newCart = cartitems.map((item) => {
       if (item._id === id && item.quantity >= 1 && item.selectedSize === size) {
         type === "add" ? (item.quantity += 1) : (item.quantity -= 1);
       }
       return item;
     });
 
-    newCart.forEach((item) => {
-      if (item.quantity === 0) {
-        handleRemove(item._id, item.selectedSize);
-      }
+    // newCart.forEach((item) => {
+    //   if (item.quantity === 0) {
+    //     handleRemove(item._id, item.size);
+    //   }
+    // });
+
+    newCart = newCart.filter((item) => item.quantity > 0);
+
+    //   post request to update cart
+    request("PATCH", link, { user, items: newCart }).then((data) => {
+      setCartItems(data.cart.items);
     });
-    setCartItems(newCart);
-    localStorage.setItem("cart", JSON.stringify(cartitems));
   };
 
-  useEffect(() => {
-    setCartItems(JSON.parse(localStorage.getItem("cart")));
-  }, []);
+  //   useEffect(() => {
+  //     setCartItems(JSON.parse(localStorage.getItem("cart")));
+  //   }, []);
   //   console.log(cartitems);
   const totalQuantity = cartitems
     ? cartitems.reduce((acc, item) => {
@@ -118,10 +158,12 @@ function Cart() {
         <div className={styles.cartInfo}>
           <div className={styles.cartHeader}>
             <h1 className={styles.cartTitle}>Shopping Cart</h1>
-            <p className={styles.cartItemsCount}>{totalQuantity} items</p>
+            <p className={styles.cartItemsCount}>
+              {totalQuantity} {totalQuantity === 1 ? "item" : "items"}
+            </p>
           </div>
           <div className={styles.cartItems}>
-            {cartitems ? (
+            {cartitems.length > 0 ? (
               cartitems.map((item) => {
                 if (item.quantity === 0) {
                   // handleRemove(item._id, item.selectedSize);
@@ -176,7 +218,7 @@ function Cart() {
           </button>
         </div>
       </div>
-      <MightLike />
+      <MightLike cartitems={cartitems} />
     </div>
   );
 }

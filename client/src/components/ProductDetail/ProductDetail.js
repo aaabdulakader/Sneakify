@@ -22,13 +22,35 @@ function ProductDetail() {
   const [sizeDropdownOpen, setSizeDropdownOpen] = useState(true);
   const [colorDropdownOpen, setColorDropdownOpen] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
   let [product, setProduct] = useState(
-    JSON.parse(localStorage.getItem("currentProduct"))
+    JSON.parse(localStorage.getItem("curretProduct"))
   );
+  //   const user = JSON.parse(localStorage.getItem("currentUser"))._id;
+  //   const link = `http://localhost:9000/users/${user}/cart`;
 
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  let link;
+  if (user) {
+    link = `http://localhost:9000/users/${user._id}/cart`;
+  }
+
+  let getCartItems = async () => {
+    if (!user) {
+      setCartItems([]);
+      return;
+    } else {
+      const response = await fetch(link);
+      const data = await response.json();
+      setCartItems(data.cart.items);
+    }
+  };
+
+  // only makes a request if the user is logged in
+  useEffect(() => {
+    getCartItems();
+  }, []);
   let productSlug = window.location.pathname.split("/")[2];
-
-  console.log(productSlug);
 
   useEffect(() => {
     if (!product) {
@@ -37,9 +59,9 @@ function ProductDetail() {
       fetch(serverLink)
         .then((res) => res.json())
         .then((data) => {
-          localStorage.setItem("currentProduct", JSON.stringify(data.product));
+          //   localStorage.setItem("currentProduct", JSON.stringify(data.product));
           setProduct(data.product);
-          console.log(data.product);
+          //   console.log("Server", data.product);
         });
     }
   }, []);
@@ -50,7 +72,7 @@ function ProductDetail() {
     setIsFavorited(!isFavorited);
   };
 
-  //   if (product.colors.length > 0) {
+  //   if (product.colors.length > 0 && !selectedColor && selectedSize) {
   //     setColorDropdownOpen(true);
   //   }
 
@@ -87,40 +109,63 @@ function ProductDetail() {
   };
 
   const handleAddToCart = () => {
-    // Get cart from localStorage
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    //   check if product is already in cart
-    const existingProduct = cart.find(
-      (item) =>
-        item._id === product._id &&
-        item.selectedSize === selectedSize &&
-        item.selectedColor === selectedColor
-    );
-
-    if (existingProduct) {
-      existingProduct.selectedQuantity += selectedQuantity;
-      localStorage.setItem("cart", JSON.stringify(cart));
+    if (!user) {
+      // save the product to local storage
+      localStorage.setItem("currentProduct", JSON.stringify(product));
+      // redirect to login page
+      window.location.href = "/login";
       return;
     }
-    const { _id, title, price, images, slug } = product;
-    // Add product to cart
-    cart.push({
-      _id,
-      title,
-      price,
-      image: images[0],
-      selectedSize,
-      selectedColor,
-      quantity: selectedQuantity,
-      slug,
-    });
 
-    // Save cart to localStorage
-    localStorage.setItem("cart", JSON.stringify(cart));
+    //if no product is selected
+    if (!product) {
+      return;
+    }
+
+    //   if no size is selected
+    if (!selectedSize) {
+      setSelectedSize("none");
+      return;
+    }
+    //   if no color is selected
+    if (!selectedColor && product.colors.length > 0) {
+      setSelectedColor("none");
+      setColorDropdownOpen(true);
+      return;
+    }
+
+    const { _id, title, price, images, slug, size, color } = product;
+    //   post request
+    request("POST", link, {
+      user,
+      items: [
+        {
+          product: _id,
+          title,
+          price,
+          image: images[0],
+          size: selectedSize,
+          color: selectedColor,
+          quantity: +selectedQuantity,
+          slug,
+        },
+      ],
+    });
 
     //reload page
     window.location.reload();
+  };
+
+  const request = async (method, url, data) => {
+    const response = await fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    return response.json();
   };
 
   //   console.log(product.title);
@@ -260,7 +305,7 @@ function ProductDetail() {
               </div>
             )}
             {selectedColor === "none" && (
-              <div className={styles.error}>Please select a size</div>
+              <div className={styles.error}>Please select a color</div>
             )}
 
             {/* Quantity and add to cart button */}

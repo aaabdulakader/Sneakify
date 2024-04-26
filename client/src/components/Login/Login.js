@@ -7,17 +7,22 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { GiRunningShoe } from "react-icons/gi";
 
+import { Alert } from "../index";
+
 function LoginForm({ setTokenAndUser }) {
   const [showPassword, setShowPassword] = useState(false);
   let [password, setPassword] = useState("");
   let [email, setEmail] = useState("");
+  const [alert, setAlert] = useState({ message: "", type: "" });
 
   const handleShowPassword = () => {
     let passwordInput = document.querySelector("#password");
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
+      setShowPassword(true);
     } else {
       passwordInput.type = "password";
+      setShowPassword(false);
     }
   };
 
@@ -38,7 +43,7 @@ function LoginForm({ setTokenAndUser }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: "1@test.c",
+        email: "2@test.c",
         password: "12",
         // email: email,
         // password: password,
@@ -49,18 +54,31 @@ function LoginForm({ setTokenAndUser }) {
         if (data.status === "success") {
           console.log(data.data.user);
           setTokenAndUser(data.token, data.data.user, data.tokenExpiresIn);
+          // Redirect to home page
+
+          // Show success message
+          setAlert({ message: data.message, type: "success" });
+
+          // console.log("currentProduct", localStorage.getItem("currentProduct"));
+          setTimeout(() => {
+            if (localStorage.getItem("currentProduct")) {
+              window.location.href = `/products/${
+                JSON.parse(localStorage.getItem("currentProduct")).slug
+              }`;
+            } else {
+              window.location.href = "/";
+            }
+          }, 1500);
         } else {
           // Show error message
-          alert(data.message);
+          setAlert({ message: data.message, type: "error" });
         }
       });
-
-    console.log(email);
-    console.log(password);
   };
 
   return (
     <div className={loginFormStyles.container}>
+      {alert.message && <Alert message={alert.message} type={alert.type} />}
       <div className={loginFormStyles.loginContainer}>
         <form className={loginFormStyles.form} onSubmit={handleLogin}>
           {/* <Link to="/" area-label="Home">
@@ -68,38 +86,43 @@ function LoginForm({ setTokenAndUser }) {
         </Link> */}
           <h2 className={loginFormStyles.formTitle}>Login</h2>
           <div className={loginFormStyles.inputContainer}>
-            <label htmlFor="email"
-              className={loginFormStyles.inputlabel}
-            
-            >Email</label>
-            <input
-              className={loginFormStyles.input}
-              type="text"
-              id="email"
-              name="email"
-              // value="user@example.com"
-              placeholder="example@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete={"on"}
-              autoFocus={true}
-              // required
-            />
+            <label htmlFor="email" className={loginFormStyles.inputlabel}>
+              Email
+              <input
+                className={loginFormStyles.input}
+                type="text"
+                id="email"
+                name="email"
+                // value="user@example.com"
+                placeholder="example@gmail.com"
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete={"on"}
+                autoFocus={true}
+                // required
+              />
+            </label>
           </div>
           <div className={loginFormStyles.inputContainer}>
             <label htmlFor="password" className={loginFormStyles.inputlabel}>
               Password
+              <input
+                className={loginFormStyles.input}
+                type="password"
+                id="password"
+                name="password"
+                // value="password1"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="on"
+                // required
+              />
+              <div
+                className={loginFormStyles.showPassword}
+                onClick={handleShowPassword}
+              >
+                {showPassword ? <MdOutlineRemoveRedEye /> : <FaRegEyeSlash />}
+              </div>
             </label>
-            <input
-              className={loginFormStyles.input}
-              type="password"
-              id="password"
-              name="password"
-              // value="password1"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="on"
-              // required
-            />
           </div>
           {/* Forgot Password and Signup Links */}
 

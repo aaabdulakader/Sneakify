@@ -30,3 +30,4 @@ export { default as Orders } from "./Orders/Orders.js";
 export { default as AccountSidebar } from "./AccountSidebar/AccountSidebar.js";
 export { default as Signup } from "./Signup/Signup.js";
 export { default as MightLike } from "./MightLike/MightLike.js";
+export { default as Alert } from "./Alert/Alert.js";

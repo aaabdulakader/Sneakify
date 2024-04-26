@@ -24,10 +24,6 @@ function Header({ logout }) {
     return acc + item.quantity;
   }, 0);
 
-  // const count = cart
-
-  console.log(count);
-
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };

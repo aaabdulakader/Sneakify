@@ -1,28 +1,28 @@
 // const fs = require("fs");
 // const path = require("path");
 
-const componentsList = [
-  "Header",
-  "Footer",
-  "ProductList",
-  "ProductDetail",
-  "Cart",
-  "Checkout",
-  "Product",
-  "RelatedProducts",
-  "Filters",
-  "SearchBar",
-  "UserAccount",
-  "ProductThumbnail",
-  "Reviews",
-  "Breadcrumb",
-  "LoginForm",
-  "SignUpForm",
-  "AddressForm",
-  "PaymentForm",
-  "ContactForm",
-  "NotFound",
-];
+// const componentsList = [
+//   "Header",
+//   "Footer",
+//   "ProductList",
+//   "ProductDetail",
+//   "Cart",
+//   "Checkout",
+//   "Product",
+//   "RelatedProducts",
+//   "Filters",
+//   "SearchBar",
+//   "UserAccount",
+//   "ProductThumbnail",
+//   "Reviews",
+//   "Breadcrumb",
+//   "LoginForm",
+//   "SignUpForm",
+//   "AddressForm",
+//   "PaymentForm",
+//   "ContactForm",
+//   "NotFound",
+// ];
 
 // const srcPath = path.join(__dirname, "src", "components");
 
@@ -96,7 +96,7 @@ function createComponent(componentNames) {
 // const componentNames = process.argv.slice(2);
 // const componentNames = []
 const componentNames =
-  process.argv.slice(2).length > 0 ? process.argv.slice(2) : componentsList;
+  process.argv.slice(2).length > 0 ? process.argv.slice(2) : ["None"];
 
 // Validate component names
 if (componentNames.length === 0) {

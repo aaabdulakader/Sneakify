@@ -10,6 +10,8 @@ import {
   Signup,
   ProductDetail,
   Cart,
+  Checkout,
+  Alert,
   // Sidebar,
 } from "./components/index.js";
 
@@ -47,10 +49,17 @@ function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([{}]);
 
+  const isUserLoggedIn = () => {
+    // check the presence of a cookie named jwt
+    const token = document.cookie;
+    setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists, false otherwise
+  };
+
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
-    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    // Clear the cookie
+    document.cookie = "jwt=; path=/; max-age=0";
 
     setIsLoggedIn(false);
 
@@ -93,6 +102,7 @@ function App() {
           <Route exact path="/women" element={<ProductList gender="women" />} />
           <Route exact path="/kids" element={<ProductList gender="kids" />} />
           <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/products/:slug" element={<ProductDetail />} />
           {/* cart */}
           <Route exact path="/cart" element={""} />
