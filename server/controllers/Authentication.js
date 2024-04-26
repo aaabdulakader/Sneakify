@@ -36,11 +36,19 @@ const login = async (req, res, next) => {
 
   console.log(user);
 
-  if (!req.body.password || !req.body.email)
-    return next("Please enter username and password");
+  if (!req.body.password || !req.body.email) {
+    res.status(400).json({
+      status: "fail",
+      message: "Please provide email and password!",
+    });
+  }
 
-  if (!user || !(await bycrypt.compare(req.body.password, user.password)))
-    return next("Wrong username or password!");
+  if (!user || !(await bycrypt.compare(req.body.password, user.password))) {
+    res.status(401).json({
+      status: "fail",
+      message: "Incorrect email or password!",
+    });
+  }
   sendToken(user, 200, res);
 };
 
@@ -97,24 +105,25 @@ const sendToken = (user, statusCode, res) => {
   // console.log(process.env.COOKIE_EXPIRES_IN);
   const isProduction = process.env.NODE_ENV === "production";
 
-  // const cookieOptions = {
-  //   httpOnly: true,
-  //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // Example: 1 day
-  //   sameSite: isProduction ? "None" : "Lax",
-  //   secure: isProduction,
-  //   path: "/",
-  // };
+  const cookieOptions = {
+    httpOnly: true,
+    expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // Example: 1 day
+    sameSite: isProduction ? "Lax" : "None",
+    // secure,
+    path: "/",
+  };
   // console.log(cookieData, "cookieData");
 
-  // res.cookie("jwt", token, cookieOptions);
+  res.cookie("jwt", token, cookieOptions);
 
   user.password = undefined;
 
   res.status(statusCode).json({
     status: "success",
+    message: "User logged in successfully!",
     token,
     // 90 days in the future
-    tokenExpiresIn: 10,
+    tokenExpiresIn: Date.now() + 90 * 24 * 60 * 60 * 1000,
     // Date.now() + process.env.JWT_EXPIRES_IN * 24 * 60 * 60 * 1000,
 
     data: {

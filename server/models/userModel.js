@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
+const Cart = require("./cartModel");
+
 const usersSchem = mongoose.Schema({
   // username: {
   type: String,
@@ -43,6 +45,44 @@ const usersSchem = mongoose.Schema({
     type: String,
     required: true,
   },
+  shippingInfo: [
+    {
+      name: {
+        type: String,
+      },
+
+      address: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      state: {
+        type: String,
+      },
+      country: {
+        type: String,
+      },
+      zip: {
+        type: String,
+      },
+    },
+  ],
+
+  paymentInfo: [
+    {
+      cardNumber: {
+        type: String,
+      },
+      expDate: {
+        type: String,
+      },
+      cvv: {
+        type: String,
+      },
+    },
+  ],
+
   createdAt: {
     type: Date,
     default: Date.now,
@@ -50,6 +90,11 @@ const usersSchem = mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now,
+  },
+
+  cart: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Cart",
   },
 });
 
@@ -69,6 +114,21 @@ usersSchem.pre("save", function (next) {
   next();
 });
 
+usersSchem.pre(/^find/, function (next) {
+  this.populate({
+    path: "cart",
+    select: "-__v",
+  });
+  next();
+});
+
+usersSchem.pre("save", async function (next) {
+  this.shippingInfo.forEach((info) => {
+    info.name = `${this.firstName} ${this.lastName}`;
+  });
+
+  next();
+});
 const User = mongoose.model("User", usersSchem);
 
 module.exports = User;
