@@ -6,6 +6,8 @@ import styles from "./ProductDetail.module.css";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
+import { Alert } from "../index";
+
 import {
   IoIosArrowRoundForward,
   IoIosArrowRoundBack,
@@ -23,6 +25,7 @@ function ProductDetail() {
   const [colorDropdownOpen, setColorDropdownOpen] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [alert, setAlert] = useState({ message: "", type: "" });
   let [product, setProduct] = useState(
     JSON.parse(localStorage.getItem("curretProduct"))
   );
@@ -150,10 +153,19 @@ function ProductDetail() {
           slug,
         },
       ],
-    });
+    })
+      .then((data) => {
+        setCartItems(data.cart.items);
+        setAlert({ message: data.message, type: "success" });
+      })
+      .catch((error) => {
+        setAlert({ message: error.message, type: "error" });
+      });
 
     //reload page
-    window.location.reload();
+    setTimeout(() => {
+      //   window.location.reload();
+    }, 1500);
   };
 
   const request = async (method, url, data) => {
@@ -170,16 +182,15 @@ function ProductDetail() {
 
   //   console.log(product.title);
   return (
-    <div>
-      {/* back button */}
-      <button
-        className={styles.backButton}
-        onClick={() => window.history.back()}
-      >
-        Back
-      </button>
-
-      {/* product detail */}
+    <div className={styles.container}>
+      {/* {alert.message && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          className={styles.alert}
+        />
+      )} */}
+      {/* product details */}
       {product && (
         <div className={styles.productDetail}>
           <section className={styles.productDetailInfo}>
@@ -189,8 +200,6 @@ function ProductDetail() {
               <p>${product.price}</p>
 
               <img
-                //   src={require("./image-6.webp")}
-                // src={require("./p-6000-premium-shoes-XkgpKW.webp")}
                 src={currentImage}
                 alt={product.title}
                 className={styles.productDetailImage}
@@ -310,8 +319,13 @@ function ProductDetail() {
 
             {/* Quantity and add to cart button */}
             <div className={styles.productSelectionsFooter}>
+              <button
+                className={styles.addToCartButton}
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </button>
               <div className={styles.quantity}>
-                {/* Dropdown */}
                 <input
                   type="number"
                   min="1"
@@ -321,28 +335,6 @@ function ProductDetail() {
                   onChange={(e) => setSelectedQuantity(e.target.value)}
                 />
               </div>
-              <button
-                className={styles.addToCartButton}
-                onClick={
-                  handleAddToCart
-                  //   () => {
-                  //     // set color selection to first color in array
-                  //     !selectedSize
-                  //       ? setSelectedSize("none")
-                  //       : setSelectedSize(selectedSize);
-
-                  //     !selectedColor && product.colors.length > 0
-                  //       ? setSelectedColor("none")
-                  //       : setSelectedColor(selectedColor);
-
-                  //     if (!selectedColor) setColorDropdownOpen(true);
-                  //         }
-                }
-              >
-                Add to Cart
-              </button>
-
-              {/* favorite */}
               {isFavorited ? (
                 <FaHeart
                   className={styles.heartIcon + " " + styles.favoriteIcon}
@@ -355,6 +347,8 @@ function ProductDetail() {
                 />
               )}
             </div>
+
+            {/*  */}
           </section>
         </div>
       )}

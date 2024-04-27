@@ -5,7 +5,6 @@ import { FaSort } from "react-icons/fa6";
 // import { useHistory } from "react-router-dom";
 
 import styles from "./ProductList.module.css";
-// import ProductList from "../../../../clientt/src/components/ProductList/ProductList";
 
 function ProductList({ gender }) {
   const [products, setProducts] = useState([]);
@@ -16,8 +15,6 @@ function ProductList({ gender }) {
   const [size, setSize] = useState([]);
   const [price, setPrice] = useState([]);
   const [color, setColor] = useState([]);
-
-  // const [gender, setGender] = useState("");
 
   // loading blur effect
   const productList = document.querySelector(".productList");
@@ -45,18 +42,6 @@ function ProductList({ gender }) {
         }
       });
   };
-  // if gender is passed as a prop, filter products
-  //   useEffect(() => {
-  //     if (gender) {
-  //       setFilteredProducts((products) =>
-  //         products.filter((product) =>
-  //           product.subTitle.toLowerCase().includes(gender.toLowerCase())
-  //         )
-  //       );
-  //     } else {
-  //       fetchProducts();
-  //     }
-  //   }, [gender]);
 
   const handleShowMore = () => {
     // Fetch more products
@@ -97,7 +82,7 @@ function ProductList({ gender }) {
     <div className={styles.container}>
       {/* Filter By button */}
       {/* wrapper for filter and sort */}
-      <div className={styles.wrapper}>
+      <div className={styles.filterWrapper}>
         <div className={styles.filterByContainer} onClick={handleFilter}>
           {/* {<IoFilterOutline className={styles.filterByIcon} />} */}
           <button className={styles.filterByButton}>Filter</button>

@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { MightLike } from "../index";
+import { MightLike, Alert } from "../index";
 
 import styles from "./Cart.module.css";
 
@@ -26,7 +26,7 @@ const CartItem = ({ item, handleRemove, handleAddAndminus }) => {
       <div className={styles.cartItemInfo}>
         <h3 className={styles.cartItemTitle}>{item.title}</h3>
         <div className={styles.cartItemActions}>
-          <p className={styles.size}>{item.selectedSize}</p>
+          <p className={styles.size}>{item.size}</p>
           <div className={styles.itemQuantity}>
             <FiMinus
               className={styles.minus}
@@ -218,7 +218,7 @@ function Cart() {
           </button>
         </div>
       </div>
-      <MightLike cartitems={cartitems} />
+      {/* <MightLike cartitems={cartitems} /> */}
     </div>
   );
 }
