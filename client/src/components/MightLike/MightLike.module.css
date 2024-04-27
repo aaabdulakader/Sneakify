@@ -16,14 +16,11 @@
 }
 
 .mightLikeProducts {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); */
   display: flex;
-  /* flex-wrap: wrap; */
   justify-content: space-between;
   overflow-x: scroll;
   gap: 20px;
-  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px 0;
 }
@@ -33,8 +30,14 @@
   /* height: 400px; */
 }
 
+@media screen and (max-width: 1024px) {
+  .mightLike {
+    display: none;
+    /* margin: 40px 20px;
+    max-width: 100vw; */
+  }
+}
 @media screen and (max-width: 685px) {
   .mightLike {
-    /* display: none; */
   }
 }
