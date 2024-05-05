@@ -57,6 +57,7 @@ const CartItem = ({ item, handleRemove, handleAddAndminus }) => {
 
 function Cart() {
   const [cartitems, setCartItems] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("currentUser"));
   let link;
@@ -155,7 +156,7 @@ function Cart() {
   return (
     <div className={styles.container}>
       <div className={styles.cart}>
-        <div className={styles.cartInfo}>
+        <div className={styles.cartInfo + " " + (clicked && styles.clicked)}>
           <div className={styles.cartHeader}>
             <h1 className={styles.cartTitle}>Shopping Cart</h1>
             <p className={styles.cartItemsCount}>
@@ -186,7 +187,7 @@ function Cart() {
         </div>
 
         {/* cart summary */}
-        <div className={styles.cartSummary}>
+        <div className={styles.cartSummary + " " + (clicked && styles.clicked)}>
           <h3 className={styles.cartSummaryTitle}>Cart Summary</h3>
           <div className={styles.cartSummaryItem}>
             <p className={styles.cartSummaryItemText}>Subtotal</p>
@@ -210,15 +211,18 @@ function Cart() {
             </p>
           </div>
 
-          <button
-            className={styles.checkoutButton}
-            disabled={totalQuantity === 0}
-          >
-            Proceed to Checkout
-          </button>
+          <Link to="/checkout">
+            <button
+              className={styles.checkoutButton}
+              disabled={totalQuantity === 0}
+              onClick={() => setClicked(true)}
+            >
+              Proceed to Checkout
+            </button>
+          </Link>
         </div>
       </div>
-      {/* <MightLike cartitems={cartitems} /> */}
+      <MightLike cartitems={cartitems} />
     </div>
   );
 }

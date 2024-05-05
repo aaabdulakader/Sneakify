@@ -37,17 +37,24 @@ const orderSchema = new mongoose.Schema({
     },
   ],
   shipping_address: {
-    name: String,
-    street: String,
+    address: String,
     city: String,
     state: String,
     zip: String,
     country: String,
+    phone: String,
+    isDefault: Boolean,
   },
+
   payment_method: {
     type: String,
     enum: ["credit card", "debit card", "paypal"],
     required: true,
+  },
+  paymentInfo: {
+    cardNumber: String,
+    expDate: String,
+    cvv: String,
   },
   total_amount: {
     type: Number,
@@ -87,6 +94,8 @@ orderSchema.pre("save", function (next) {
   });
   next();
 });
+
+
 
 const Order = mongoose.model("Order", orderSchema);
 

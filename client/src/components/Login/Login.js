@@ -78,7 +78,13 @@ function LoginForm({ setTokenAndUser }) {
 
   return (
     <div className={loginFormStyles.container}>
-      {alert.message && <Alert message={alert.message} type={alert.type} />}
+      {alert.message && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          className={loginFormStyles.alert}
+        />
+      )}
       <div className={loginFormStyles.loginContainer}>
         <form className={loginFormStyles.form} onSubmit={handleLogin}>
           {/* <Link to="/" area-label="Home">
@@ -98,7 +104,6 @@ function LoginForm({ setTokenAndUser }) {
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete={"on"}
                 autoFocus={true}
-                // required
               />
             </label>
           </div>

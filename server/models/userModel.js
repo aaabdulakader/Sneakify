@@ -3,6 +3,7 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
 const Cart = require("./cartModel");
+const { ObjectId } = require("mongodb");
 
 const usersSchem = mongoose.Schema({
   // username: {
@@ -45,43 +46,34 @@ const usersSchem = mongoose.Schema({
     type: String,
     required: true,
   },
-  shippingInfo: [
+  shipping_address: {
+    name: String,
+    street: String,
+    city: String,
+    state: String,
+    zip: String,
+    country: String,
+    phone: String,
+  },
+  shipping_addresses: [
     {
-      name: {
-        type: String,
-      },
-
-      address: {
-        type: String,
-      },
-      city: {
-        type: String,
-      },
-      state: {
-        type: String,
-      },
-      country: {
-        type: String,
-      },
-      zip: {
-        type: String,
-      },
+      firstName: String,
+      lastName: String,
+      email: String,
+      street: String,
+      city: String,
+      state: String,
+      zip: String,
+      country: String,
+      phone: String,
+      isDefault: Boolean,
     },
   ],
-
-  paymentInfo: [
-    {
-      cardNumber: {
-        type: String,
-      },
-      expDate: {
-        type: String,
-      },
-      cvv: {
-        type: String,
-      },
-    },
-  ],
+  paymentInfo: {
+    cardNumber: String,
+    expDate: String,
+    cvv: String,
+  },
 
   createdAt: {
     type: Date,
@@ -97,6 +89,21 @@ const usersSchem = mongoose.Schema({
     ref: "Cart",
   },
 });
+
+// example:
+
+// "shipping_addresses": [
+//   {
+//     "name": "John Doe",
+//     "street": "123 Main St",
+//     "city": "Minneapolis",
+//     "state": "MN",
+//     "zip": "55401",
+//     "country": "USA",
+//     "phone": "123-456-7890",
+//     "isDefault": true
+//   },
+// ]
 
 usersSchem.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
@@ -114,6 +121,8 @@ usersSchem.pre("save", function (next) {
   next();
 });
 
+// when saved_addresses array,is being modified add the new address to the shipping_addresses array
+
 usersSchem.pre(/^find/, function (next) {
   this.populate({
     path: "cart",
@@ -129,6 +138,22 @@ usersSchem.pre("save", async function (next) {
 
   next();
 });
+
+//  if isDefault is true, set all other addresses to false ans the shipping address the one with isDefault true
+usersSchem.pre("save", function (next) {
+  this.shipping_addresses.forEach((address) => {
+    if (address.isDefault) {
+      this.shipping_address = address;
+      this.shipping_addresses.forEach((add) => {
+        add.isDefault = false;
+      });
+    } else {
+      this.shipping_address = this.shipping_addresses[0];
+    }
+  });
+  next();
+});
+
 const User = mongoose.model("User", usersSchem);
 
 module.exports = User;

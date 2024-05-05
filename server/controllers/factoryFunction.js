@@ -54,7 +54,7 @@ exports.updateOne = (Model) =>
 
     res.status(200).json({
       status: "success",
-      document,
+      documents,
     });
   });
 
@@ -126,21 +126,8 @@ exports.postCart = (Model) =>
     });
     console.log("req.body", req.body);
 
-    // console.log("cartItemProduct", cart.items[0].product);
-
-    // console.log("existsInCart", existsInCart);
-
-    // console.log("existingItemIndex", existingItemIndex);
-
-    // existingItemIndex !== -1
-    //   ? console.log("Product exists in cart")
-    //   : console.log("Product does not exist in cart");
-
     // If the product exists in the cart, update the quantity
     if (existsInCart.length > 0) {
-      // console.log("Product exists in cart");
-      // console.log(typeof cart.items[0].quantity);
-      // update the quantity
       cart.items.forEach((item) => {
         if (
           item.product === items[0].product &&
@@ -178,7 +165,9 @@ exports.postCart = (Model) =>
       }
     );
 
-    res.status(201).json({ status: "success", cart });
+    res
+      .status(201)
+      .json({ status: "success", cart, message: "Item added to cart" });
   });
 
 exports.deleteAll = (Model) =>

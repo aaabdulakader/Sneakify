@@ -1,9 +1,9 @@
 /* Alert component styles */
 
-.alert {
+.main_alert {
   position: absolute;
-  top: 2%;
-  /* left: 50%; */
+  /* top: 2%;
+  left: 50%; */
   transform: translateX(-50%);
   width: 400px;
   padding: 20px;
@@ -11,12 +11,12 @@
   animation: slide 0.5s forwards;
 }
 
-.alert.error {
+.main_alert.error {
   background-color: #f8d7da;
   color: #721c24;
 }
 
-.alert.success {
+.main_alert.success {
   background-color: #2cb94d;
   color: #e1e7e2;
 }
