@@ -311,6 +311,9 @@
 /* 420px */
 
 @media screen and (max-width: 420px) {
+  .cartTitle {
+    font-size: 20px;
+  }
   .cartItemInfo {
     flex-direction: column;
   }

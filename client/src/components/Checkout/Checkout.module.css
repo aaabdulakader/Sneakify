@@ -232,7 +232,7 @@ select {
 }
 .orderItem:hover {
   background-color: #f8f7f5;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
 }
 .itemDetails {
