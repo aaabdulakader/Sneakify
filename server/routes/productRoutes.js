@@ -7,11 +7,13 @@ const {
   deleteProduct,
   getOne,
   getOneSlug,
+  getTopProducts,
 } = require("./../controllers/productController");
 
 const router = express.Router();
 
 // router.route("/").post(createProduct).get(deleteProduct);
+router.route("/top").get(getTopProducts);
 router.route("/").get(getAllProducts).post(createProduct);
 router.route("/:id").delete(deleteProduct).patch(updateProduct).get(getOne);
 // slug parameter

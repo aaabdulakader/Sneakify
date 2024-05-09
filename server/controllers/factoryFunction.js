@@ -6,7 +6,6 @@ const { type } = require("os");
 exports.getOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const document = await Model.findById(req.params.id);
-
     if (!document) {
       return next(`No ${Model.modelName} found with that ID`);
     }
@@ -197,12 +196,20 @@ exports.updateCart = (Model) =>
     res.status(200).json({ status: "success", cart });
   });
 
+// get top products
+exports.getTop = (Model) => {
+  return catchAsync(async (req, res, next) => {
+    const documents = await Model.find().sort("rating").limit(3);
+
+    res.status(200).json({
+      status: "success",
+      results: documents.length,
+      documents,
+    });
+  });
+};
+
 // orders
-
-// exports.getUserOrders = (Model) => {
-//   return "user orders";
-// };
-
 exports.createOrder = (Model) =>
   catchAsync(async (req, res, next) => {
     const { user, items, shipping_address, payment_method } = req.body;
