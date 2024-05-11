@@ -31,3 +31,6 @@ export { default as AccountSidebar } from "./AccountSidebar/AccountSidebar.js";
 export { default as Signup } from "./Signup/Signup.js";
 export { default as MightLike } from "./MightLike/MightLike.js";
 export { default as Alert } from "./Alert/Alert.js";
+export { default as FeaturedProducts } from "./FeaturedProducts/FeaturedProducts.js";
+export { default as Newsletter } from "./Newsletter/Newsletter.js";
+export { default as ShopCategory } from "./ShopCategory/ShopCategory.js";

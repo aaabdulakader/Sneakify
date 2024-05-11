@@ -199,7 +199,8 @@ exports.updateCart = (Model) =>
 // get top products
 exports.getTop = (Model) => {
   return catchAsync(async (req, res, next) => {
-    const documents = await Model.find().sort("rating").limit(3);
+    const limit = req.params.id * 1;
+    const documents = await Model.find().sort({ rating: -1 }).limit(limit);
 
     res.status(200).json({
       status: "success",

@@ -1,1 +1,174 @@
 /* Hero component styles */
+
+.hero {
+  height: 95vh;
+  max-width: 100vw;
+  margin: -20px auto 0;
+  z-index: 1;
+  position: relative;
+}
+
+.heroSlides {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+}
+.heroSlide {
+  display: none;
+}
+
+.heroSlide.active {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  scale: 0.9;
+  opacity: 1;
+  z-index: 1;
+  transition: opacity 0.5s ease-in-out;
+  background: 50% 55% / cover;
+  /* rotate backgoround */
+}
+
+.heroSlide:hover {
+  /* opacity: 0.5; */
+  /* cursor: pointer; */
+}
+
+.heroSlide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scale: 0.8;
+  animation: slide 0.5s ease-in-out;
+  /* transform: rotate(-10deg); */
+  margin-left: 5rem;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  /* gap: 10px; */
+  width: 60%;
+  height: 100%;
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  /* color: #333; */
+  text-align: left;
+}
+
+.heroArrows {
+  display: flex;
+  position: absolute;
+  top: 90%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 100%;
+  padding: 0 20px;
+}
+.heroDots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 100%;
+}
+.heroDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 5;
+}
+
+.heroDot.active {
+  background-color: #333;
+  width: 15px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.heroArrow {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+.heroArrow:hover {
+  opacity: 0.5;
+}
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0d0c0c;
+  font-family: "Poppins", sans-serif;
+}
+
+.shopBtn {
+  padding: 10px 20px;
+  margin-top: 5rem;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.shopBtn:hover {
+  background-color: #333;
+}
+
+/* animations */
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  /* .heroText {
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } */
+  .title {
+    font-size: 2rem;
+  }
+  .shopBtn {
+    margin-top: 2rem;
+  }
+
+  .heroSlide {
+    /* resize bg img by 40% smaller */
+    background-size: 60% 60%;
+  }
+}

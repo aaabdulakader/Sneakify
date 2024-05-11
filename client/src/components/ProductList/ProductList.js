@@ -8,15 +8,9 @@ import styles from "./ProductList.module.css";
 
 function ProductList({ gender }) {
   const [products, setProducts] = useState([]);
-  //   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [category, setCategory] = useState([]);
-  const [size, setSize] = useState([]);
-  const [price, setPrice] = useState([]);
-  const [color, setColor] = useState([]);
 
-  // loading blur effect
   const productList = document.querySelector(".productList");
   console.log(productList);
 
@@ -33,8 +27,8 @@ function ProductList({ gender }) {
         const allProducts = data.documents;
 
         if (gender) {
-          const filteredProducts = allProducts.filter((product) =>
-            product.subTitle.toLowerCase().includes(gender.toLowerCase())
+          const filteredProducts = allProducts.filter(
+            (product) => product.subTitle.toLowerCase() === gender.toLowerCase()
           );
           setProducts(filteredProducts);
         } else {
@@ -67,8 +61,6 @@ function ProductList({ gender }) {
       });
       setProducts(sortedProducts);
     }
-
-    // Hide loading indicator after updating products
     setLoading(false);
   };
 
@@ -80,18 +72,14 @@ function ProductList({ gender }) {
 
   return (
     <div className={styles.container}>
-      {/* Filter By button */}
-      {/* wrapper for filter and sort */}
       <div className={styles.filterWrapper}>
         <div className={styles.filterByContainer} onClick={handleFilter}>
-          {/* {<IoFilterOutline className={styles.filterByIcon} />} */}
           <button className={styles.filterByButton}>Filter</button>
         </div>
 
         {/* Sort by dropdown */}
         <div className={styles.sortByContainer}>
           Sort By:
-          {/* {<FaSort className={styles.sortByIcon} />} */}
           <select className={styles.sortBySelect} onChange={handleSortChange}>
             <option value="newest">Newest</option>
             <option value="price-low-to-high">Price: Low-High</option>

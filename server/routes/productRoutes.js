@@ -13,7 +13,7 @@ const {
 const router = express.Router();
 
 // router.route("/").post(createProduct).get(deleteProduct);
-router.route("/top").get(getTopProducts);
+router.route("/top/:id").get(getTopProducts);
 router.route("/").get(getAllProducts).post(createProduct);
 router.route("/:id").delete(deleteProduct).patch(updateProduct).get(getOne);
 // slug parameter

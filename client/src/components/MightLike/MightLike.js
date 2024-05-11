@@ -37,10 +37,9 @@ function MightLike({ cartitems }) {
   return (
     <div className={styles.mightLike}>
       <h2 className={styles.mightLikeTitle}>
-        {/* You might {cartitems.length > 0 ? "also" : ""} like */}
+        You might {cartitems.length > 0 ? "also" : ""} like
       </h2>
       <div className={styles.mightLikeProducts}>
-        {/* Top 3  ratedproducts */}
         {suggestedProducts
           .sort((a, b) => b.rating - a.rating)
           .map((product) => (

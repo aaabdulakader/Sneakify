@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+// import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import styles from "./Checkout.module.css";
@@ -85,7 +86,13 @@ function Checkout() {
     });
   };
 
+  // check if user is logged in by checking if jwt cookie is present in the browser cookie
+
   useEffect(() => {
+    if (!document.cookie.includes("jwt")) {
+      return (window.location.href = "/login");
+    }
+    
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const fetchCart = async () => {
       const response = await fetch(
