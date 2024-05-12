@@ -1,55 +1,89 @@
 // Account.jsx
-import React, { useState } from "react";
+import { React, useState, useEffect } from "react";
 // import AccountSidebar from "./AccountSidebar";
-import { AccountSidebar, Favorites, Orders, UserInfo } from "./../index.js";
+import { Favorites, Orders, UserInfo } from "./../index.js";
 import styles from "./Account.module.css";
 import { Routes, Route, Link, Outlet } from "react-router-dom";
+import { MdFavoriteBorder } from "react-icons/md";
+import { BiBox } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+import { FaUser } from "react-icons/fa";
 
 const Sidebar = () => {
+  const [selectedTab, setSelectedTab] = useState(
+    window.location.pathname.split("/")[2]
+  );
+  const [showTab, setShowTab] = useState(true);
+
   return (
-    <div className="sidebar">
-      <ul>
-        <li>
-          <Link to="/account/userinfo">User Info</Link>
+    <div
+      className={styles.sidebar}
+      // onMouseEnter={() => setShowTab(true)}
+      // onMouseLeave={() => setShowTab(false)}
+    >
+      <div className={styles.titleWrapper}>
+        <FaUser className={styles.userIcon} />
+        {showTab && <h2 className={styles.sidebarTitle}>Account</h2>}
+      </div>
+      <ul className={styles.sidebarList}>
+        <li
+          className={
+            styles.tab + " " + (selectedTab === "userInfo" ? styles.active : "")
+          }
+          onClick={() => setSelectedTab("userInfo")}
+        >
+          <CgProfile className={styles.tabIcon} />
+          {showTab && <Link to="/account/userInfo">User Info</Link>}
         </li>
-        <li>
-          <Link to="/account/favorites">Favorites</Link>
+        <li
+          className={
+            styles.tab +
+            " " +
+            (selectedTab === "favorites" ? styles.active : "")
+          }
+          onClick={() => setSelectedTab("favorites")}
+        >
+          <MdFavoriteBorder className={styles.tabIcon} />
+          {showTab && <Link to="/account/favorites">Favorites</Link>}
         </li>
-        <li>
-          <Link to="/account/orders">Orders</Link>
+        <li
+          className={
+            styles.tab + " " + (selectedTab === "orders" ? styles.active : "")
+          }
+          onClick={() => setSelectedTab("orders")}
+        >
+          <BiBox className={styles.tabIcon} />
+          {showTab && <Link to="/account/orders">Orders</Link>}
         </li>
       </ul>
     </div>
   );
 };
 
-// Main content component
-// const MainContent = () => {
-//   return (
-//     <div className="main-content">
-//       <Outlet />
-//     </div>
-//   );
-// };
+const Account = () => {
+  // get current user
+  const userId = JSON.parse(localStorage.getItem("currentUser"))._id;
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    fetch(`http://localhost:9000/users/${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data.document);
+        return data;
+      });
+  }, []);
 
-// const Account = () => {
-//   // State to track the currently selected tab
-//   const [selectedTab, setSelectedTab] = useState("userInfo");
+  // redirect to userInfo page by default
+  if (window.location.pathname.includes("account")) {
+    // window.location.href = "/account/userInfo";
+  }
 
-//   return (
-//     <div className="page-container">
-//       <Sidebar />
-//       <MainContent />
-//     </div>
-//   );
-// };
-
-const AccountPage = () => {
+  console.log(user);
   return (
-    <div className={styles.accountPage}>
-      <AccountSidebar />
+    <div className={styles.account}>
+      <Sidebar />
       <Routes>
-        <Route path="userinfo" element={<UserInfo />} />
+        <Route path="userInfo" element={<UserInfo user={user} />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path="orders" element={<Orders />} />
       </Routes>
@@ -57,4 +91,12 @@ const AccountPage = () => {
   );
 };
 
-export default Sidebar;
+// const Account = () => {
+//   return (
+//     <div className={styles.accountPage}>
+//       <AccountSidebar />
+//     </div>
+//   );
+// };
+
+export default Account;

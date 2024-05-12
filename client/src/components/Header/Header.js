@@ -11,6 +11,23 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import { IoMenuOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
+// import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
+
+const ProfileDropdown = ({ logout }) => {
+  return (
+    <div className={headerStyles.profileDropdown}>
+      <Link to="/account/userInfo" area-label="Account">
+        Account
+      </Link>
+      <Link to="/account/orders" area-label="Orders">
+        Orders
+      </Link>
+      <Link to="/logout" area-label="Logout" onClick={logout}>
+        Logout
+      </Link>
+    </div>
+  );
+};
 
 function Header({ logout }) {
   // States
@@ -30,7 +47,7 @@ function Header({ logout }) {
   // const checklogin = () =>
   useEffect(() => {
     // check the presence of a cookie named jwt
-    const token = document.cookie;
+    const token = document.cookie.includes("jwt");
     setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists, false otherwise
   }, []);
 
@@ -40,112 +57,124 @@ function Header({ logout }) {
 
   // console.log(isLoggedIn);
   return (
-    <header className={headerStyles.header + " container"}>
-      {/* Logo */}
-      <Link to="/" area-label="Home">
-        <GiRunningShoe className={headerStyles.logo} />
-      </Link>
-      <nav className={headerStyles.nav + " mobileMenu"} area-label="Navigation">
-        <ul className={headerStyles.navList}>
-          <li>
-            <Link className={headerStyles.navLink} to="/" area-label="Home">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link className={headerStyles.navLink} to="/men" area-label="Men">
-              Men
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={headerStyles.navLink}
-              to="/women"
-              area-label="Women"
-            >
-              Women
-            </Link>
-          </li>
-          <li>
-            <Link className={headerStyles.navLink} to="/kids" area-label="Kids">
-              Kids
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={headerStyles.navLink}
-              to="/products"
-              area-label="Products"
-            >
-              Products
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={headerStyles.navLink}
-              to="/contact"
-              area-label="Contact"
-            >
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      {/* Login link or Profile Icon */}
-      <div className={headerStyles.rightNav} area-label="Right Navigation">
-        {/* Search */}
-        <div className={headerStyles.search}>
-          <input
-            type="text"
-            placeholder="Search"
-            className={headerStyles.searchInput}
-            id="search"
-          />
-          {/* <IoIosSearch className={headerStyles.searchIcon} /> */}
-        </div>
-        {isLoggedIn ? (
-          <Link to="/account" area-label="Profile">
-            <RiAccountCircleLine
-              className={headerStyles.profileIcon}
-              onMouseEnter={toggleMobileMenu}
-            />
-          </Link>
-        ) : (
-          <Link className={headerStyles.navLink} to="/login">
-            Login
-          </Link>
-        )}
-
-        <Link className={headerStyles.cartIcon} to="/cart" area-label="Cart">
-          <BsCart3 className={headerStyles.cartLogo} />
-          {count !== 0 && (
-            <span className={headerStyles.cartCount}>{count}</span>
-          )}
+    <header className={headerStyles.header}>
+      <div className={headerStyles.container}>
+        {/* Logo */}
+        <Link to="/" area-label="Home">
+          <GiRunningShoe className={headerStyles.logo} />
         </Link>
-
-        {isMobileMenuOpen ? (
-          <IoCloseOutline
-            onClick={toggleMobileMenu}
-            className={headerStyles.menuIconClose}
-          />
-        ) : (
-          <IoMenuOutline
-            onClick={toggleMobileMenu}
-            className={headerStyles.menuIcon}
-          />
-        )}
-
-        {/* Mobile nav */}
-        {
-          // if mobile menu is open, show mobile nav
-          isMobileMenuOpen && (
-            <MobileNav
-              onClose={toggleMobileMenu}
-              active={isMobileMenuOpen}
-              logout={logout}
+        <nav
+          className={headerStyles.nav + " mobileMenu"}
+          area-label="Navigation"
+        >
+          <ul className={headerStyles.navList}>
+            <li>
+              <Link className={headerStyles.navLink} to="/" area-label="Home">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link className={headerStyles.navLink} to="/men" area-label="Men">
+                Men
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={headerStyles.navLink}
+                to="/women"
+                area-label="Women"
+              >
+                Women
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={headerStyles.navLink}
+                to="/kids"
+                area-label="Kids"
+              >
+                Kids
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={headerStyles.navLink}
+                to="/products"
+                area-label="Products"
+              >
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={headerStyles.navLink}
+                to="/contact"
+                area-label="Contact"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        {/* Login link or Profile Icon */}
+        <div className={headerStyles.rightNav} area-label="Right Navigation">
+          {/* Search */}
+          <div className={headerStyles.search}>
+            <input
+              type="text"
+              placeholder="Search"
+              className={headerStyles.searchInput}
+              id="search"
             />
-          )
-        }
+            {/* <IoIosSearch className={headerStyles.searchIcon} /> */}
+          </div>
+          {isLoggedIn ? (
+            <Link area-label="Profile">
+              <RiAccountCircleLine
+                className={headerStyles.profileIcon}
+                onClick={() => handleDropdown()}
+                // onMouseLeave={() => handleDropdown()}
+              />
+            </Link>
+          ) : (
+            <Link className={headerStyles.navLink} to="/login">
+              Login
+            </Link>
+          )}
+
+          <Link className={headerStyles.cartIcon} to="/cart" area-label="Cart">
+            <BsCart3 className={headerStyles.cartLogo} />
+            {count !== 0 && (
+              <span className={headerStyles.cartCount}>{count}</span>
+            )}
+          </Link>
+
+          {isMobileMenuOpen ? (
+            <IoCloseOutline
+              onClick={toggleMobileMenu}
+              className={headerStyles.menuIconClose}
+            />
+          ) : (
+            <IoMenuOutline
+              onClick={toggleMobileMenu}
+              className={headerStyles.menuIcon}
+            />
+          )}
+
+          {/* Mobile nav */}
+          {
+            // if mobile menu is open, show mobile nav
+            isMobileMenuOpen && (
+              <MobileNav
+                onClose={toggleMobileMenu}
+                active={isMobileMenuOpen}
+                logout={logout}
+              />
+            )
+          }
+        </div>
+
+        {showProfileDropdown && <ProfileDropdown logout={logout} />}
       </div>
     </header>
   );

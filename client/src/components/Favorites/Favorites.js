@@ -1,13 +1,12 @@
 import React from "react";
-import { AccountSidebar } from "./../index.js";
+import { Product } from "./../index.js";
 
-import favoritesStyles from "./Favorites.module.css";
+import styles from "./Favorites.module.css";
 
 function Favorites() {
   return (
     <div>
-      <AccountSidebar />
-      <div className={favoritesStyles.content}>
+      <div className={styles.content}>
         <h1>Favorites</h1>
         <p>Here are your favorite items.</p>
       </div>
