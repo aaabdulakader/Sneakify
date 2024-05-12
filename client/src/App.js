@@ -116,7 +116,11 @@ function App() {
             path="/signup"
             element={<Signup setTokenAndUser={setTokenAndUser} />}
           />
-          {/* <Route exact path="/account" element={<Sidebar />} /> */}
+          <Route exact path="/account" element={<Account />}>
+            <Route path="userinfo" element={<Account />} />
+            <Route path="favorites" element={<Account />} />
+            <Route path="orders" element={<Account />} />
+          </Route>
           {/* <Route path="/account/*" element={<AccountRoutes />} /> */}
         </Routes>
       </Router>

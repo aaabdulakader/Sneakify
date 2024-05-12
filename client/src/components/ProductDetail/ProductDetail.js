@@ -73,6 +73,11 @@ function ProductDetail() {
 
   const handleFavorite = () => {
     setIsFavorited(!isFavorited);
+
+    if (isFavorited) {
+      // update the user's favorites
+      
+    }
   };
 
   //   if (product.colors.length > 0 && !selectedColor && selectedSize) {

@@ -92,7 +92,7 @@ function Checkout() {
     if (!document.cookie.includes("jwt")) {
       return (window.location.href = "/login");
     }
-    
+
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const fetchCart = async () => {
       const response = await fetch(
@@ -230,10 +230,10 @@ function Checkout() {
         {/* saved address */}
 
         <div className={styles.forms}>
-          <h2>Shipping Information</h2>
+          <h2 className={styles.h2}>Shipping Information</h2>
           {user.shipping_addresses && !showForm && (
             <>
-              {/* {user.shipping_addresses && <h2>Saved Addresses</h2>} */}
+              {/* {user.shipping_addresses && <h2 className={styles.h2}>Saved Addresses</h2>} */}
               <div className={styles.savedAddresses}>
                 {user.shipping_addresses &&
                   user.shipping_addresses.map((address, i) => (
@@ -452,7 +452,7 @@ function Checkout() {
           </div>
 
           {/* payment method */}
-          <h2>Payment Method</h2>
+          <h2 className={styles.h2}>Payment Method</h2>
           <div className={styles.paymentMethod}>
             <div className={styles.payment}>
               <label htmlFor="creditCard" className={styles.paymentLabel}>
@@ -478,7 +478,7 @@ function Checkout() {
           </div>
         </div>
         <div className={styles.order}>
-          <h2>Order Summary</h2>
+          <h2 className={styles.h2}>Order Summary</h2>
           <div className={styles.orderItems}>
             {cartitems &&
               cartitems.map((item, i) => (

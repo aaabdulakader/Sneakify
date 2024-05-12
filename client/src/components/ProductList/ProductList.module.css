@@ -29,16 +29,13 @@
 /* Filter */
 .filterByContainer {
   display: flex;
-  justify-content: start;
   align-items: center;
-  max-width: 1200px;
-  padding-left: 20px;
   background: #000;
+  gap: 10px;
+  padding: 5px 20px;
 }
 
-.filterByButton,
-.backButton {
-  padding: 5px 20px;
+.filterByButton {
   border: none;
   outline: none;
   cursor: pointer;
@@ -49,9 +46,8 @@
   background-color: transparent;
 }
 .filterByIcon {
-  margin-right: 10px;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   fill: #fff;
 }
 

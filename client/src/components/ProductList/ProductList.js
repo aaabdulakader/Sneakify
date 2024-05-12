@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Product } from "../index";
-import { IoFilterOutline } from "react-icons/io5";
+import { MdFilterListAlt } from "react-icons/md";
 import { FaSort } from "react-icons/fa6";
 // import { useHistory } from "react-router-dom";
 
@@ -74,6 +74,7 @@ function ProductList({ gender }) {
     <div className={styles.container}>
       <div className={styles.filterWrapper}>
         <div className={styles.filterByContainer} onClick={handleFilter}>
+          <MdFilterListAlt className={styles.filterByIcon} />
           <button className={styles.filterByButton}>Filter</button>
         </div>
 

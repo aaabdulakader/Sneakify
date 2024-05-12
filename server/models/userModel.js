@@ -16,6 +16,10 @@ const usersSchem = mongoose.Schema({
     required: [true, "Email required"],
     unique: [true, "User already exists"],
   },
+  phone: {
+    type: String,
+    // required: [true, "Phone number required"],
+  },
   role: {
     type: String,
     enum: ["admin", "user"],

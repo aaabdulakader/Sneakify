@@ -61,7 +61,7 @@ function LoginForm({ setTokenAndUser }) {
 
           // console.log("currentProduct", localStorage.getItem("currentProduct"));
           setTimeout(() => {
-            if (localStorage.getItem("currentProduct")) {
+            if (localStorage.getItem("")) {
               window.location.href = `/products/${
                 JSON.parse(localStorage.getItem("currentProduct")).slug
               }`;
