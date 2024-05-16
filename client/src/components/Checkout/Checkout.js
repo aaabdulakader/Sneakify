@@ -482,7 +482,11 @@ function Checkout() {
           <div className={styles.orderItems}>
             {cartitems &&
               cartitems.map((item, i) => (
-                <Link to={item.slug} className={styles.orderItem} key={i}>
+                <Link
+                  to={`/products/${item.slug}`}
+                  className={styles.orderItem}
+                  key={i}
+                >
                   <img src={item.image} alt={item.name} />
                   <div className={styles.itemDetails}>
                     <h3>{item.title}</h3>

@@ -10,17 +10,18 @@ import { CgProfile } from "react-icons/cg";
 import { FaUser } from "react-icons/fa";
 
 const Sidebar = () => {
+  const current = window.location.pathname.split("/")[2];
   const [selectedTab, setSelectedTab] = useState(
-    window.location.pathname.split("/")[2]
+    current === "userInfo"
+      ? "userInfo"
+      : current === "favorites"
+      ? "favorites"
+      : "orders"
   );
   const [showTab, setShowTab] = useState(true);
 
   return (
-    <div
-      className={styles.sidebar}
-      // onMouseEnter={() => setShowTab(true)}
-      // onMouseLeave={() => setShowTab(false)}
-    >
+    <div className={styles.sidebar}>
       <div className={styles.titleWrapper}>
         <FaUser className={styles.userIcon} />
         {showTab && <h2 className={styles.sidebarTitle}>Account</h2>}

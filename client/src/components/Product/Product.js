@@ -1,5 +1,5 @@
 import React from "react";
-
+import { motion } from "framer-motion";
 import styles from "./Product.module.css";
 
 function Product({ product }) {
@@ -20,7 +20,16 @@ function Product({ product }) {
   const image = `https://picsum.photos/200?random=${randomImage}`;
   // Prduct component, to be used in ProductList component. should display a product card with an image, title, price, and a button to add to cart.
   return (
-    <div className={styles.product} key={product._id}>
+    <motion.div
+      className={styles.product}
+      key={product._id}
+      initial={{ opacity: 0, y: 1 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{
+        scale: 1.05,
+      }}
+      transition={{ duration: 0.7 }}
+    >
       {/* product card */}
       {/* <div className={styles.productCard + " scale_up_center"}> */}
       <div
@@ -40,7 +49,7 @@ function Product({ product }) {
 
         {/* <button className={styles.addToCartButton}>Add to Cart</button> */}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

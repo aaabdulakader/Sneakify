@@ -13,14 +13,29 @@ import { IoCloseOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
 // import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 
-const ProfileDropdown = ({ logout }) => {
+const ProfileDropdown = ({ logout, setDropdown }) => {
   return (
     <div className={headerStyles.profileDropdown}>
-      <Link to="/account/userInfo" area-label="Account">
+      <Link
+        to="/account/userInfo"
+        area-label="Account"
+        onClick={() => setDropdown(false)}
+      >
         Account
       </Link>
-      <Link to="/account/orders" area-label="Orders">
+      <Link
+        to="/account/orders"
+        area-label="Orders"
+        onClick={() => setDropdown(false)}
+      >
         Orders
+      </Link>
+      <Link
+        to="/account/favorites"
+        area-label="Favorites"
+        onClick={() => setDropdown(false)}
+      >
+        Favorites
       </Link>
       <Link to="/logout" area-label="Logout" onClick={logout}>
         Logout
@@ -174,7 +189,12 @@ function Header({ logout }) {
           }
         </div>
 
-        {showProfileDropdown && <ProfileDropdown logout={logout} />}
+        {showProfileDropdown && (
+          <ProfileDropdown
+            logout={logout}
+            setDropdown={setShowProfileDropdown}
+          />
+        )}
       </div>
     </header>
   );
