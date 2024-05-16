@@ -147,6 +147,7 @@ exports.postCart = (Model) =>
         color: items[0].color,
         price: items[0].price,
         image: items[0].image,
+        slug: items[0].slug,
         createdAt: Date.now(),
         updatedAt: Date.now(),
         // totalQuantity: items[0].quantity

@@ -52,6 +52,11 @@ const cartSchema = new mongoose.Schema({
         default: Date.now(),
       },
 
+      slug: {
+        type: String,
+        // required: true,
+      },
+
       // slug: {
       //   type: String,
       //   validate: this.validate({
@@ -127,8 +132,6 @@ cartSchema.pre(/^find/, function (next) {
 //   }, 0);
 //   next();
 // });
-
-
 
 const Cart = mongoose.model("Cart", cartSchema);
 
