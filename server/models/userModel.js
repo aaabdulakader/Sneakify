@@ -92,6 +92,12 @@ const usersSchem = mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Cart",
   },
+  favorites: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Product",
+    },
+  ],
 });
 
 // example:
