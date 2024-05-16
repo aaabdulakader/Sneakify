@@ -25,6 +25,10 @@
   padding: 20px;
   margin: 5rem auto;
   max-width: 1200px;
+  transition: all 0.3s ease;
+}
+.productDetail.added {
+  opacity: 0.2;
 }
 
 .productDetailInfo {
@@ -197,8 +201,6 @@
   color: #fff;
   width: fit-content;
   height: fit-content;
-  /* border-radius: 50%; */
-  /* background-color: #000; */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -218,6 +220,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  height: 50px;
   margin-top: 5rem;
 }
 
@@ -226,16 +229,53 @@
   color: red;
   font-size: 14px;
 }
+.quantity {
+  height: 100%;
+}
 
-.quantityInput {
-  width: 60px;
-  padding: 10px 5px;
+.quantityLabel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* gap: 10px; */
+  width: 100px;
+  height: 100%;
+  padding: 5px 5px;
   border: 1px solid #000;
   border-radius: 5px;
+  background-color: #f0f0f0;
+}
+.quantityInput {
+  align-items: center;
+  text-align: center;
+  width: 25px;
+  padding: 10px 5px;
+  border: none;
+  /* border-radius: 0; */
+  background-color: transparent;
   outline: none;
 }
 
+/* hide arrows */
+.quantityInput::-webkit-inner-spin-button,
+.quantityInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantityInput[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.quantityIcon {
+  width: 20px;
+  height: 20px;
+  fill: #000;
+  cursor: pointer;
+}
+
 .addToCartButton {
+  height: 100%;
   padding: 10px 20px;
   border: none;
   outline: none;
@@ -249,13 +289,13 @@
 }
 
 .heartIcon {
-  width: 40px;
-  height: 100%;
+  width: 50px;
+  height: 50px;
   fill: #000;
   cursor: pointer;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   transition: all 0.3s ease;
-  padding: 5px;
+  /* padding: 5px; */
   border-radius: 5px;
 }
 
@@ -267,6 +307,87 @@
 .addToCartButton:hover,
 .heartIcon:hover {
   scale: 1.1;
+}
+
+/* added to cart pop up component */
+.addedToCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 350px;
+  height: auto;
+  position: fixed;
+  top: 65px;
+  right: 50px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  z-index: 100;
+  animation: slide 0.5s forwards;
+}
+.addedToCartMessage {
+  color: #1fdc25;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  align-self: center;
+}
+
+.addedToCart img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.productInfo {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+}
+.productDetails p {
+  font-size: 0.8rem;
+  color: #777;
+}
+.productTitle {
+  font-size: 0.5rem;
+  font-weight: 600;
+  width: 100%;
+  text-align: left;
+}
+
+.addedToCartButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.addedToCartButtons a {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  background: #000;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.addedToCartButtons a:hover {
+  background-color: transparent;
+  color: #000;
+  box-shadow: inset 0 0 0 1px #000;
 }
 
 /* animation */
@@ -322,7 +443,54 @@
 }
 
 @media screen and (max-width: 400px) {
+  .productDetail {
+    margin-block: 0;
+  }
+  .productDetailTitle {
+    font-size: 1.2rem;
+  }
+
+  .info {
+    gap: 5px;
+  }
+
+  .productSelections {
+    margin-top: 1rem;
+  }
+
   .productSelectionsFooter {
     width: 100%;
+  }
+
+  .addedToCart {
+    width: 90%;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+  }
+
+  .productSelectionsFooter {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .addToCartButton {
+    padding: 10px 10px;
+  }
+  .quantityInput {
+    padding: 5px 5px;
+  }
+  .quantityIcon {
+    width: 15px;
+    height: 15px;
+  }
+  .quantityLabel {
+    width: 80px;
+    padding: 5px 5px;
+  }
+  .heartIcon {
+    width: 40px;
+    height: 40px;
+    margin-left: 0;
   }
 }

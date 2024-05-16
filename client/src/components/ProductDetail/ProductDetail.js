@@ -1,10 +1,15 @@
 import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./ProductDetail.module.css";
 
 // icons
 import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
+import { CiHeart } from "react-icons/ci";
+
+import { FaMinus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 
 import { Alert } from "../index";
 
@@ -15,6 +20,29 @@ import {
   IoIosArrowUp,
 } from "react-icons/io";
 
+// pop up component after adding to cart
+
+const AddedToCart = ({ product, size, color, quantity }) => {
+  return (
+    <div className={styles.addedToCart}>
+      <p className={styles.addedToCartMessage}>Added to Cart</p>
+      <div className={styles.productInfo}>
+        <img src={product.images[0]} alt={product.title} />
+        <div className={styles.productDetails}>
+          <p className={styles.productTitle}>{product.title}</p>
+          <p>${product.price}</p>
+          <p>Size {size}</p>
+          <p>Quantity {quantity}x</p>
+        </div>
+      </div>
+      <div className={styles.addedToCartButtons}>
+        <Link to="/cart">View Cart</Link>
+        <Link to="/checkout">Checkout</Link>
+      </div>
+    </div>
+  );
+};
+
 // const cart
 function ProductDetail() {
   const [currentImage, setCurrentImage] = useState("");
@@ -23,18 +51,23 @@ function ProductDetail() {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [sizeDropdownOpen, setSizeDropdownOpen] = useState(true);
   const [colorDropdownOpen, setColorDropdownOpen] = useState(false);
+  let [product, setProduct] = useState();
   const [isFavorited, setIsFavorited] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [alert, setAlert] = useState({ message: "", type: "" });
-  let [product, setProduct] = useState(
-    JSON.parse(localStorage.getItem("curretProduct"))
-  );
+  const [addedToCart, setAddedToCart] = useState(false);
+  // JSON.parse(localStorage.getItem("curretProduct"))
   //   const user = JSON.parse(localStorage.getItem("currentUser"))._id;
   //   const link = `http://localhost:9000/users/${user}/cart`;
 
-  const user = JSON.parse(localStorage.getItem("currentUser"));
+  let [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser"))
+  );
+
+  let favorites = user ? user.favorites : [];
   let link;
   if (user) {
+    // user = JSON.parse(user);
     link = `http://localhost:9000/users/${user._id}/cart`;
   }
 
@@ -53,6 +86,7 @@ function ProductDetail() {
   useEffect(() => {
     getCartItems();
   }, []);
+
   let productSlug = window.location.pathname.split("/")[2];
 
   useEffect(() => {
@@ -62,27 +96,33 @@ function ProductDetail() {
       fetch(serverLink)
         .then((res) => res.json())
         .then((data) => {
-          //   localStorage.setItem("currentProduct", JSON.stringify(data.product));
           setProduct(data.product);
-          //   console.log("Server", data.product);
         });
     }
   }, []);
 
-  // server link
+  useEffect(() => {
+    if (favorites && product) {
+      setIsFavorited(favorites.includes(product._id));
+    }
+  }, [product, favorites]);
 
   const handleFavorite = () => {
     setIsFavorited(!isFavorited);
 
-    if (isFavorited) {
-      // update the user's favorites
-      
+    if (isFavorited && favorites && favorites.includes(product._id)) {
+      favorites = favorites.filter((favorite) => favorite !== product._id);
+    } else {
+      favorites = [...favorites, product._id];
     }
-  };
 
-  //   if (product.colors.length > 0 && !selectedColor && selectedSize) {
-  //     setColorDropdownOpen(true);
-  //   }
+    // update the user's favorites in the database
+    request("PATCH", `http://localhost:9000/users/${user._id}`, {
+      favorites,
+    }).then((data) => {
+      setUser(data.documents);
+    });
+  };
 
   if (product && !currentImage) {
     setCurrentImage(product.images[0]);
@@ -155,13 +195,18 @@ function ProductDetail() {
           size: selectedSize,
           color: selectedColor,
           quantity: +selectedQuantity,
-          slug,
+          slug: slug,
         },
       ],
     })
       .then((data) => {
         setCartItems(data.cart.items);
         setAlert({ message: data.message, type: "success" });
+        setAddedToCart(true);
+
+        setTimeout(() => {
+          setAddedToCart(false);
+        }, 6000);
       })
       .catch((error) => {
         setAlert({ message: error.message, type: "error" });
@@ -185,19 +230,25 @@ function ProductDetail() {
     return response.json();
   };
 
-  //   console.log(product.title);
   return (
+    // add added class to container if added to cart
     <div className={styles.container}>
-      {/* {alert.message && (
-        <Alert
-          message={alert.message}
-          type={alert.type}
-          className={styles.alert}
+      {addedToCart && (
+        <AddedToCart
+          product={product}
+          size={selectedSize}
+          color={selectedColor}
+          quantity={selectedQuantity}
         />
-      )} */}
+      )}
       {/* product details */}
       {product && (
-        <div className={styles.productDetail}>
+        <div
+          className={
+            styles.productDetail + " " + (addedToCart ? " " + styles.added : "")
+          }
+          onClick={() => setAddedToCart(false)}
+        >
           <section className={styles.productDetailInfo}>
             <div className={styles.info}>
               <p>{product.subTitle}</p>
@@ -324,29 +375,44 @@ function ProductDetail() {
 
             {/* Quantity and add to cart button */}
             <div className={styles.productSelectionsFooter}>
+              <div className={styles.quantity}>
+                <label htmlFor="quantity" className={styles.quantityLabel}>
+                  <FaMinus
+                    className={styles.quantityIcon}
+                    onClick={() => {
+                      if (selectedQuantity > 1) {
+                        setSelectedQuantity(+selectedQuantity - 1);
+                      }
+                    }}
+                  />
+                  <input
+                    type="number"
+                    min="1"
+                    max="10"
+                    // defaultValue={selectedQuantity}
+                    value={selectedQuantity}
+                    className={styles.quantityInput}
+                    onChange={(e) => setSelectedQuantity(e.target.value)}
+                  />
+                  <FaPlus
+                    className={styles.quantityIcon}
+                    onClick={() => setSelectedQuantity(+selectedQuantity + 1)}
+                  />
+                </label>
+              </div>
               <button
                 className={styles.addToCartButton}
                 onClick={handleAddToCart}
               >
                 Add to Cart
               </button>
-              <div className={styles.quantity}>
-                <input
-                  type="number"
-                  min="1"
-                  max="10"
-                  defaultValue="1"
-                  className={styles.quantityInput}
-                  onChange={(e) => setSelectedQuantity(e.target.value)}
-                />
-              </div>
               {isFavorited ? (
                 <FaHeart
                   className={styles.heartIcon + " " + styles.favoriteIcon}
                   onClick={handleFavorite}
                 />
               ) : (
-                <FaRegHeart
+                <CiHeart
                   className={styles.heartIcon}
                   onClick={handleFavorite}
                 />
