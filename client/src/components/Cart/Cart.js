@@ -24,7 +24,14 @@ const CartItem = ({ item, handleRemove, handleAddAndminus }) => {
       </Link>
 
       <div className={styles.cartItemInfo}>
-        <h3 className={styles.cartItemTitle}>{item.title}</h3>
+        <h3
+          className={styles.cartItemTitle}
+          onClick={() => {
+            window.location.href = `/products/${item.slug}`;
+          }}
+        >
+          {item.title}
+        </h3>
         <div className={styles.cartItemActions}>
           <p className={styles.size}>{item.size}</p>
           <div className={styles.itemQuantity}>
