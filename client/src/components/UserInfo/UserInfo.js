@@ -94,12 +94,12 @@ function UserInfo({ user }) {
             />
           </label>
         </div>
-        <div className={styles.formGroup}>
+        {/* <div className={styles.formGroup}>
           <label htmlFor="password" className={styles.label}>
             Password
             <input type="password" id="password" className={styles.input} />
           </label>
-        </div>
+        </div> */}
         <button type="submit" className={styles.submitBtn}>
           Save Changes
         </button>
