@@ -12,6 +12,7 @@ import {
   Cart,
   Checkout,
   Alert,
+  Footer,
   // Sidebar,
 } from "./components/index.js";
 
@@ -123,6 +124,7 @@ function App() {
           </Route>
           {/* <Route path="/account/*" element={<AccountRoutes />} /> */}
         </Routes>
+        <Footer />
       </Router>
     </div>
   );
