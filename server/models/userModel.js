@@ -96,6 +96,7 @@ const usersSchem = mongoose.Schema({
     {
       type: mongoose.Schema.ObjectId,
       ref: "Product",
+      unique: true,
     },
   ],
 });
@@ -138,31 +139,37 @@ usersSchem.pre(/^find/, function (next) {
     path: "cart",
     select: "-__v",
   });
+  // populate favorites array with the products
+  this.populate({
+    path: "favorites",
+    select: "_id title price stageImage slug",
+  });
+
   next();
 });
 
 usersSchem.pre("save", async function (next) {
-  this.shippingInfo.forEach((info) => {
-    info.name = `${this.firstName} ${this.lastName}`;
-  });
+  // this.shippingInfo.forEach((info) => {
+  //   info.name = `${this.firstName} ${this.lastName}`;
+  // });
 
   next();
 });
 
 //  if isDefault is true, set all other addresses to false ans the shipping address the one with isDefault true
-usersSchem.pre("save", function (next) {
-  this.shipping_addresses.forEach((address) => {
-    if (address.isDefault) {
-      this.shipping_address = address;
-      this.shipping_addresses.forEach((add) => {
-        add.isDefault = false;
-      });
-    } else {
-      this.shipping_address = this.shipping_addresses[0];
-    }
-  });
-  next();
-});
+// usersSchem.pre("save", function (next) {
+//   this.shipping_addresses.forEach((address) => {
+//     if (address.isDefault) {
+//       this.shipping_address = address;
+//       this.shipping_addresses.forEach((add) => {
+//         add.isDefault = false;
+//       });
+//     } else {
+//       this.shipping_address = this.shipping_addresses[0];
+//     }
+//   });
+//   next();
+// });
 
 const User = mongoose.model("User", usersSchem);
 

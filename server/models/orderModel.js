@@ -30,7 +30,10 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-
+      image: {
+        type: String,
+        // required: true,
+      },
       subtotal: {
         type: Number,
       },
@@ -48,7 +51,7 @@ const orderSchema = new mongoose.Schema({
 
   payment_method: {
     type: String,
-    enum: ["credit card", "debit card", "paypal"],
+    enum: ["card", "paypal"],
     required: true,
   },
   paymentInfo: {
@@ -75,22 +78,31 @@ orderSchema.pre("save", function (next) {
   next();
 });
 
+// orderSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: "user",
+//     select: "firstName lastName email",
+//   });
+
+//   next();
+// });
+
+// orderSchema.pre("save", function (next) {
+//   let total = 0;
+//   this.items.forEach((item) => {
+//     item.subtotal = item.price * item.quantity;
+//     total += item.subtotal;
+
+//     this.total_amount = total + total * 0.05;
+//   });
+//   next();
+// });
+
+// populate the product_id field with the product details
 orderSchema.pre(/^find/, function (next) {
   this.populate({
-    path: "user",
-    select: "firstName lastName email",
-  });
-
-  next();
-});
-
-orderSchema.pre("save", function (next) {
-  let total = 0;
-  this.items.forEach((item) => {
-    item.subtotal = item.price * item.quantity;
-    total += item.subtotal;
-
-    this.total_amount = total + total * 0.05;
+    path: "items.product_id",
+    select: "title slug",
   });
   next();
 });

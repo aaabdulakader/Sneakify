@@ -1,6 +1,7 @@
 const catchAsync = require("./../catchAsync");
 
 const User = require("../models/userModel");
+const Product = require("../models/productModel");
 const { type } = require("os");
 
 exports.getOne = (Model) =>
@@ -81,7 +82,6 @@ exports.getCart = (Model) =>
     res.status(200).json({
       status: "success",
       user: document[0].user,
-      // length: document[0].items,
       cart: document[0],
     });
   });
@@ -90,12 +90,9 @@ exports.postCart = (Model) =>
   catchAsync(async (req, res, next) => {
     const { user, items } = req.body;
 
-    console.log("req.body", req.body);
-
     // Check if the user exists
     const userExists = await User.findById(user);
 
-    // console.log("userExists", userExists);
     if (!userExists) {
       return res
         .status(404)
@@ -104,13 +101,10 @@ exports.postCart = (Model) =>
 
     // Find the user's cart document
     let cart = await Model.findOne({ user });
-    // console.log("cart", cart);
     // If the user doesn't have a cart yet, create one
     if (!cart) {
       cart = await Model.create({ user, items: [] });
     }
-
-    // console.log("cart", cart);
 
     // Check if the product is already in the user's cart
     const existsInCart = await Model.find({
@@ -123,7 +117,6 @@ exports.postCart = (Model) =>
         },
       },
     });
-    console.log("req.body", req.body);
 
     // If the product exists in the cart, update the quantity
     if (existsInCart.length > 0) {
@@ -133,7 +126,6 @@ exports.postCart = (Model) =>
           item.size === items[0].size &&
           item.color === items[0].color
         ) {
-          // console.log("item", item);
           item.quantity = +item.quantity + items[0].quantity;
         }
       });
@@ -216,7 +208,6 @@ exports.createOrder = (Model) =>
   catchAsync(async (req, res, next) => {
     const { user, items, shipping_address, payment_method } = req.body;
 
-    console.log("req.body", req.body);
     // Check if the user exists
     const userExists = await User.findById({ _id: user });
 
@@ -238,4 +229,102 @@ exports.createOrder = (Model) =>
       status: "success",
       order,
     });
+  });
+
+exports.getAllUserOrders = (Model) => {
+  return catchAsync(async (req, res, next) => {
+    const orders = await Model.find({ user: req.params.id });
+
+    res.status(200).json({
+      status: "success",
+      results: orders.length,
+      orders,
+    });
+  });
+};
+
+exports.deleteUserCart = (Model) => {
+  return catchAsync(async (req, res, next) => {
+    console.log(req.params.id);
+
+    // delete the cart document that hast the user's id in the user field
+    await Model.deleteOne({ user: req.params.id });
+
+    res.status(204).json({
+      status: "success",
+      document: null,
+    });
+  });
+};
+
+exports.AddDeleteFavorite = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const { id, productId } = req.params;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "User not found" });
+    }
+
+    const userFavorites = user.favorites;
+
+    if (req.method === "DELETE") {
+      const favorite = userFavorites.filter((fav) => fav._id == productId);
+
+      if (favorite.length === 0) {
+        return res
+          .status(404)
+          .json({ status: "error", message: "Product not in favorites" });
+      }
+
+      const index = userFavorites.indexOf(favorite[0]);
+
+      userFavorites.splice(index, 1);
+
+      user.favorites = userFavorites;
+      await user.save({ validateBeforeSave: false });
+
+      return res.status(200).json({
+        status: "success",
+        user,
+      });
+    }
+
+    if (req.method === "POST") {
+      // add the product to the user's favorites
+      const product = await Product.findById(productId);
+
+      if (!product) {
+        return res
+          .status(404)
+          .json({ status: "error", message: "Product not found" });
+      }
+
+      // check if the product is already in the user's favorites
+      const exists = userFavorites.filter((fav) => fav._id == productId);
+
+      if (exists.length > 0) {
+        return res
+          .status(404)
+          .json({ status: "error", message: "Product already in favorites" });
+      }
+
+      user.favorites.push({
+        _id: product._id,
+        title: product.title,
+        price: product.price,
+        stageImage: product.stageImage,
+        slug: product.slug,
+      });
+
+      await user.save({ validateBeforeSave: false });
+
+      return res.status(200).json({
+        status: "success",
+        user,
+      });
+    }
   });

@@ -17,20 +17,31 @@ const {
   getAllOrders,
   getUserOrders,
   postOrder,
+  AddDeleteFavorite,
+  getAllUserOrders,
+  getOrder,
+  deleteUserCart,
 } = require("../controllers/userController");
 
 const router = express.Router();
 
-router.route("/").get(getAllUsers, testMiddleware).post(signUp);
+router.route("/").get(secure, getAllUsers, testMiddleware).post(signUp);
 router.route("/cart").get(getAllCarts).delete(deleteAll);
-router.route("/:id/cart").get(getCart).post(postCart).patch(updateCart);
-router.route("/:id/orders").post(postOrder).get(getAllOrders);
-// router.route("/orders").get(getAllOrders).post(postOrder);
 router
-  .route("/:id")
-  .delete(secure, deleteUser)
-  .patch(updateUser)
-  .get(getUser);
+  .route("/:id/cart")
+  .get(getCart)
+  .post(postCart)
+  .patch(updateCart)
+  .delete(deleteUserCart);
+router
+  .route("/:id/favorites/:productId")
+  .post(AddDeleteFavorite)
+  .delete(AddDeleteFavorite);
+router.route("/:id/orders").post(postOrder).get(getAllUserOrders);
+router.route("/orders").get(getAllOrders);
+router.route("/orders/:id").get(getOrder);
+// router.route("/orders").get(getAllOrders).post(postOrder);
+router.route("/:id").delete(secure, deleteUser).patch(updateUser).get(getUser);
 
 router.route("/signup").post(signUp);
 router.route("/login").post(login);
