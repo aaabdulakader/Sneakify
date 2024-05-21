@@ -29,7 +29,6 @@ function Hero({ topProducts }) {
                   ? styles.heroSlide + " " + styles.active
                   : styles.heroSlide
               }
-              // style={{ backgroundImage: `url(${product.images[0]})` }}
               onClick={() =>
                 (window.location.href = "/products/" + product.slug)
               }
@@ -54,7 +53,7 @@ function Hero({ topProducts }) {
             >
               <img
                 className={styles.heroImage}
-                src={product.images[0]}
+                src={product.stageImage}
                 alt={product.title}
               />
               <div className={styles.heroText}>
@@ -90,7 +89,6 @@ function Hero({ topProducts }) {
               setCurrentSlide(
                 currentSlide === 0 ? topProducts.length - 1 : currentSlide - 1
               );
-              // clearTimeout(timer);
             }}
           />
 
@@ -100,7 +98,6 @@ function Hero({ topProducts }) {
               setCurrentSlide(
                 currentSlide === topProducts.length - 1 ? 0 : currentSlide + 1
               );
-              // clearTimeout(timer);
             }}
           />
           {/* <FaAngleRight /> */}

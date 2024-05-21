@@ -1,57 +1,129 @@
-/* Footer component styles */
-
 .footer {
-  background-color: #000;
-  color: #fff !important;
+  flex-direction: column;
+  gap: 40px;
+  background-color: #1a1a1a;
   padding: 20px;
   text-align: center;
+  width: 100%;
+  margin-top: 3rem;
 }
 
-.footerContainer {
+.footer,
+.footerLogo,
+.footerLinks,
+.footerTextContainer {
   display: flex;
-  justify-content: space-between;
-  /* align-items: center; */
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: left;
-  color: #fff;
+  justify-content: center;
+  align-items: center;
 }
 
-.footerColumn {
-  display: flex;
+.footerLogo {
   flex-direction: column;
-  justify-content: flex-start;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.logoIcon {
+  width: 50px;
+  height: 50px;
+  fill: white;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: white;
+}
+
+.footerLinks {
   gap: 10px;
 }
 
-.footerTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
+.footerLink {
+  color: gray;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
 }
-.footerTitle,
-.footerText,
-.footerText > a,
-.socialLinks {
-  color: #fff;
-}
-.footerText {
-  font-size: 1rem;
+
+.footerLink:hover {
+  color: white;
 }
 .socialLinks {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 15px;
+}
+.socialLink svg {
+  fill: gray;
 }
 
-.facebook {
-  fill: #3b5998;
+.socialLink svg:hover {
+  fill: white;
 }
-.twitter {
-  fill: #00acee;
+
+.footerTextContainer {
+  gap: 10px;
 }
-.instagram {
-  fill: #e4405f;
+
+.footerText,
+.footerText a {
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footerText a:hover {
+  color: white;
+}
+
+.devider {
+  width: 1px;
+  height: 20px;
+  background-color: gray;
+}
+
+/* responsive */
+
+@media screen and (max-width: 400px) {
+  .footer {
+    padding: 20px 10px;
+  }
+  .footerLogo .logoText {
+    font-size: 16px;
+  }
+
+  .footerLinks {
+    flex-direction: column;
+  }
+
+  .footerLink {
+    font-size: 14px;
+    justify-content: flex-start;
+  }
+
+  .socialLinks {
+    margin-top: 20px;
+  }
+
+  .socialLink svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .footerTextContainer {
+    flex-direction: column;
+  }
+
+  .footerText {
+    font-size: 12px;
+  }
+
+  .devider {
+    /* display: none; */
+    height: 1px;
+    width: 20%;
+  }
 }

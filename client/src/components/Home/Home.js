@@ -36,7 +36,7 @@ function Home() {
       <ShopCategory />
       <FeaturedProducts products={products} />
       <Newsletter />
-      <Footer />
+
     </div>
   );
 }

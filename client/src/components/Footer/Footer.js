@@ -1,47 +1,67 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { GiRunningShoe } from "react-icons/gi";
 
 function Footer() {
   return (
-    <footer>
-      <div className={styles.footer}>
-        <div className={styles.footerContainer}>
-          <div className={styles.footerColumn}>
-            <h3 className={styles.footerTitle}>About</h3>
-            <p className={styles.footerText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
-          </div>
-          <div className={styles.footerColumn}>
-            <h3 className={styles.footerTitle}>Contact</h3>
-            <p className={styles.footerText}>
-              Email:
-              <a href="mailto:sneakify.support@sneakify.com">
-                sneakify.support@sneakify.com
-              </a>
-            </p>
-            <p className={styles.footerText}>Phone: 123-456-7890</p>
-          </div>
-          <div className={styles.footerColumn}>
-            <h3 className={styles.footerTitle}>Social</h3>
-            <div className={styles.socialLinks}>
-              <a href="https://www.facebook.com" className={styles.socialLink}>
-                <FaFacebookF className={styles.facebook} />
-              </a>
-              <a href="https://www.twitter.com" className={styles.socialLink}>
-                <FaTwitter className={styles.twitter} />
-              </a>
-              <a href="https://www.instagram.com" className={styles.socialLink}>
-                <FaInstagram className={styles.instagram} />
-              </a>
-            </div>
-          </div>
-        </div>
+    <footer className={styles.footer}>
+      <div className={styles.footerLogo}>
+        <Link to="/" className={styles.logoLink}>
+          <GiRunningShoe className={styles.logoIcon} />
+        </Link>
+      </div>
+      <div className={styles.footerLinks}>
+        {/* <Link to="/home" className={styles.footerLink}>
+          Home
+        </Link> */}
+        <Link to="/products/men" className={styles.footerLink}>
+          MEN
+        </Link>
+        <Link to="/products/women" className={styles.footerLink}>
+          WOMEN
+        </Link>
+        <Link to="/products/kids" className={styles.footerLink}>
+          KIDS
+        </Link>
+        <Link to="/products" className={styles.footerLink}>
+          PRODUCTS
+        </Link>
+        <Link to="/account" className={styles.footerLink}>
+          ACOUNT
+        </Link>
+        <Link to="/account/favorites" className={styles.footerLink}>
+          FAVORITES
+        </Link>
+        <Link to="/account/orders" className={styles.footerLink}>
+          ORDERS
+        </Link>
+      </div>
+      <div className={styles.socialLinks}>
+        <a href="https://www.facebook.com" className={styles.socialLink}>
+          <FaFacebookF className={styles.facebook} />
+        </a>
+        <a href="https://www.twitter.com" className={styles.socialLink}>
+          <FaTwitter className={styles.twitter} />
+        </a>
+        <a href="https://www.instagram.com" className={styles.socialLink}>
+          <FaInstagram className={styles.instagram} />
+        </a>
+      </div>
+      <div className={styles.footerTextContainer}>
+        <p className={styles.footerText}>
+          <a href="mailto:sneakify.support@sneakify.com">
+            sneakify.support@sneakify.com
+          </a>
+        </p>
+        <span className={styles.devider}></span>
+        <p className={styles.footerText}>
+          &copy; 2021 Sneakify. All rights reserved.
+        </p>
       </div>
     </footer>
   );
