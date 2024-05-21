@@ -8,6 +8,8 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { BiBox } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaUser } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 
 const Sidebar = () => {
   const current = window.location.pathname.split("/")[2];
@@ -34,7 +36,7 @@ const Sidebar = () => {
           onClick={() => setSelectedTab("userInfo")}
         >
           <CgProfile className={styles.tabIcon} />
-          {showTab && <Link to="/account/userInfo">User Info</Link>}
+          {showTab && <Link to="/account/userInfo">User info</Link>}
         </li>
         <li
           className={
@@ -74,18 +76,30 @@ const Account = () => {
       });
   }, []);
 
+  const [showSidebar, setShowSidebar] = useState(true);
+  // get screen width
+  const screenWidth = window.innerWidth;
   // redirect to userInfo page by default
   if (window.location.pathname.includes("account")) {
     // window.location.href = "/account/userInfo";
   }
 
-  console.log(user);
   return (
     <div className={styles.account}>
+      {/* <div className={styles.sidebarWrapper}> */}
       <Sidebar />
-      <Routes>
-        <Route path="userInfo" element={<UserInfo user={user} />} />
-        <Route path="favorites" element={<Favorites />} />
+
+      <Routes className={styles.content}>
+        <Route
+          path="userInfo"
+          element={<UserInfo user={user} />}
+          className={styles.userInfo}
+        />
+        <Route
+          path="favorites"
+          element={<Favorites />}
+          className={styles.favorites}
+        />
         <Route path="orders" element={<Orders />} />
       </Routes>
     </div>

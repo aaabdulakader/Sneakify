@@ -2,22 +2,44 @@
 /* Account.module.css */
 
 .account {
-  max-width: 1200px;
   margin: 0 auto;
   height: 100vh;
   display: flex;
+  gap: 20px;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  padding-bottom: 20px;
   background-color: #f0f0f0;
-  max-width: 20%;
+  min-width: 15%;
   height: 100%;
   text-align: left;
   transition: all 0.6s ease;
+}
+.sidebarWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 300px;
+  background-color: #000;
+}
+/* .showSidebarButton {
+  width: 100%;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  border: none;
+} */
+
+.favorites {
+  /* width: 80%; */
 }
 .titleWrapper {
   display: flex;
@@ -43,7 +65,6 @@
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
-  padding: 0 10px;
   cursor: pointer;
   transition: background-color 0.3s;
   color: #333;
@@ -52,7 +73,7 @@
 
 .tabIcon,
 .userIcon {
-  width: 25px;
+  min-width: 25px;
   height: 25px;
 }
 
@@ -75,9 +96,45 @@
   color: #333;
   width: 100%;
   height: 100%;
-  padding: 10px 0;
+  /* padding: 10px 0; */
 }
 
 .tab a:hover {
-  color: #fff;
+  color: #424141;
+}
+
+@media screen and (max-width: 700px) {
+  .account {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: fit-content;
+    z-index: 1;
+    transition: all 0.6s ease;
+    padding-block: 10px;
+  }
+
+  .sidebarList {
+    flex-direction: row;
+    margin-top: 0;
+    gap: 10px;
+  }
+
+  .titleWrapper {
+    display: none;
+  }
+  .tab {
+    padding: 10px;
+    width: fit-content;
+  }
+  .tab.active {
+    box-shadow: none;
+    background-color: #f0f0f0;
+    font-weight: 600;
+  }
+
+  .tabIcon {
+    display: none;
+  }
 }
