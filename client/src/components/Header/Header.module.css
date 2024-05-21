@@ -8,7 +8,6 @@
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   z-index: 100;
-  /* position: relative; */
 }
 
 .container {
@@ -58,14 +57,13 @@ a {
 .navLink {
   font-size: 16px;
   font-weight: 500;
+  cursor: pointer;
 }
-
 .rightNav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  /* display: relative; */
 }
 
 .profileDropdown {
@@ -149,7 +147,6 @@ a {
 }
 
 /*  Responsive  */
-
 @media (max-width: 768px) {
   .header {
     padding: 10px 20px;

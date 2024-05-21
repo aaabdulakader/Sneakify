@@ -43,8 +43,8 @@ function LoginForm({ setTokenAndUser }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: "2@test.c",
-        password: "12",
+        email: "user1@example.com",
+        password: "user123",
         // email: email,
         // password: password,
       }),

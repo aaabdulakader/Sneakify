@@ -8,6 +8,9 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
 
+import { IoIosStar } from "react-icons/io";
+import { IoIosStarOutline } from "react-icons/io";
+
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 
@@ -19,6 +22,7 @@ import {
   IoIosArrowDown,
   IoIosArrowUp,
 } from "react-icons/io";
+import { set } from "mongoose";
 
 // pop up component after adding to cart
 
@@ -51,7 +55,7 @@ function ProductDetail() {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [sizeDropdownOpen, setSizeDropdownOpen] = useState(true);
   const [colorDropdownOpen, setColorDropdownOpen] = useState(false);
-  let [product, setProduct] = useState();
+  const [product, setProduct] = useState();
   const [isFavorited, setIsFavorited] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [alert, setAlert] = useState({ message: "", type: "" });
@@ -60,32 +64,28 @@ function ProductDetail() {
   //   const user = JSON.parse(localStorage.getItem("currentUser"))._id;
   //   const link = `http://localhost:9000/users/${user}/cart`;
 
-  let [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("currentUser"))
-  );
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  let userId = currentUser._id;
 
-  let favorites = user ? user.favorites : [];
-  let link;
-  if (user) {
-    // user = JSON.parse(user);
-    link = `http://localhost:9000/users/${user._id}/cart`;
-  }
+  const [favorites, setFavorites] = useState([]);
+  const [user, setUser] = useState();
 
-  let getCartItems = async () => {
-    if (!user) {
-      setCartItems([]);
-      return;
-    } else {
-      const response = await fetch(link);
-      const data = await response.json();
-      setCartItems(data.cart.items);
-    }
+  // get user
+  let getUser = async () => {
+    const response = await fetch(`http://localhost:9000/users/${userId}`);
+    const data = await response.json();
+    setUser(data.document);
+    setFavorites(data.document.favorites);
   };
 
-  // only makes a request if the user is logged in
   useEffect(() => {
-    getCartItems();
+    getUser();
   }, []);
+
+  let link;
+  if (user) {
+    link = `http://localhost:9000/users/${user._id}/cart`;
+  }
 
   let productSlug = window.location.pathname.split("/")[2];
 
@@ -103,27 +103,29 @@ function ProductDetail() {
 
   useEffect(() => {
     if (favorites && product) {
-      setIsFavorited(favorites.includes(product._id));
+      setIsFavorited(
+        favorites.some((favorite) => favorite._id === product._id)
+      );
     }
-  }, [product, favorites]);
+  }, [favorites, product]);
 
+  // handle favorite
   const handleFavorite = () => {
-    setIsFavorited(!isFavorited);
+    const link = `http://localhost:9000/users/${userId}/favorites/${product._id}`;
 
-    if (isFavorited && favorites && favorites.includes(product._id)) {
-      favorites = favorites.filter((favorite) => favorite !== product._id);
+    if (isFavorited) {
+      request("DELETE", link).then((data) => {
+        setUser(data.documents);
+      });
     } else {
-      favorites = [...favorites, product._id];
+      request("POST", link).then((data) => {
+        setUser(data.documents);
+      });
     }
-
-    // update the user's favorites in the database
-    request("PATCH", `http://localhost:9000/users/${user._id}`, {
-      favorites,
-    }).then((data) => {
-      setUser(data.documents);
-    });
+    setIsFavorited(!isFavorited);
   };
 
+  // image carousel
   if (product && !currentImage) {
     setCurrentImage(product.images[0]);
   }
@@ -148,6 +150,7 @@ function ProductDetail() {
     setCurrentImage(product.images[nextIndex]);
   };
 
+  // dropdowns
   const handleOpenDropdown = (dropdownType) => {
     if (dropdownType === "size") {
       setSizeDropdownOpen(!sizeDropdownOpen);
@@ -158,9 +161,7 @@ function ProductDetail() {
 
   const handleAddToCart = () => {
     if (!user) {
-      // save the product to local storage
       localStorage.setItem("currentProduct", JSON.stringify(product));
-      // redirect to login page
       window.location.href = "/login";
       return;
     }
@@ -183,7 +184,8 @@ function ProductDetail() {
     }
 
     const { _id, title, price, images, slug, size, color } = product;
-    //   post request
+
+    //   add to cart post request
     request("POST", link, {
       user,
       items: [
@@ -407,12 +409,12 @@ function ProductDetail() {
                 Add to Cart
               </button>
               {isFavorited ? (
-                <FaHeart
+                <IoIosStar
                   className={styles.heartIcon + " " + styles.favoriteIcon}
                   onClick={handleFavorite}
                 />
               ) : (
-                <CiHeart
+                <IoIosStarOutline
                   className={styles.heartIcon}
                   onClick={handleFavorite}
                 />

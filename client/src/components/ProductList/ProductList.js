@@ -179,52 +179,16 @@ function ProductList({ gender }) {
               {/* Category options */}
               <div className={styles.categoryOptions}>
                 <div className={styles.checkboxContainer}>
+                  {/* range  input*/}
                   <input
-                    type="checkbox"
-                    id="price-0-50"
-                    name="price-0-50"
+                    type="range"
+                    id="price-range"
+                    name="price-range"
+                    min="0"
+                    max="500"
+                    onChange={handleFilterChange}
                   ></input>
-                  <label htmlFor="price-0-50">$0 - $50</label>
-                </div>
-                <div className={styles.checkboxContainer}>
-                  <input
-                    type="checkbox"
-                    id="price-50-100"
-                    name="price-50-100"
-                  ></input>
-                  <label htmlFor="price-50-100">$50 - $100</label>
-                </div>
-                <div className={styles.checkboxContainer}>
-                  <input
-                    type="checkbox"
-                    id="price-100-150"
-                    name="price-100-150"
-                  ></input>
-                  <label htmlFor="price-100-150">$100 - $150</label>
-                </div>
-                <div className={styles.checkboxContainer}>
-                  <input
-                    type="checkbox"
-                    id="price-150-200"
-                    name="price-150-200"
-                  ></input>
-                  <label htmlFor="price-150-200">$150 - $200</label>
-                </div>
-                <div className={styles.checkboxContainer}>
-                  <input
-                    type="checkbox"
-                    id="price-200-250"
-                    name="price-200-250"
-                  ></input>
-                  <label htmlFor="price-200-250">$200 - $250</label>
-                </div>
-                <div className={styles.checkboxContainer}>
-                  <input
-                    type="checkbox"
-                    id="price-250-300"
-                    name="price-250-300"
-                  ></input>
-                  <label htmlFor="price-250-300">$250 - $300</label>
+                  <label htmlFor="price-range">0 - 500</label>
                 </div>
               </div>
             </div>

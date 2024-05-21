@@ -120,15 +120,6 @@ function Header({ logout }) {
                 Products
               </Link>
             </li>
-            <li>
-              <Link
-                className={headerStyles.navLink}
-                to="/contact"
-                area-label="Contact"
-              >
-                Contact
-              </Link>
-            </li>
           </ul>
         </nav>
         {/* Login link or Profile Icon */}

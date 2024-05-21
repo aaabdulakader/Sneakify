@@ -23,7 +23,7 @@
   align-items: start;
   gap: 40px;
   padding: 20px;
-  margin: 5rem auto;
+  margin: 2rem auto;
   max-width: 1200px;
   transition: all 0.3s ease;
 }
@@ -52,12 +52,16 @@
   width: 100%;
   max-width: 100%;
   height: 60%;
-  max-height: 600px;
+  max-height: 500px;
   border-radius: 10px;
   object-fit: cover;
   margin-top: 20px;
   -webkit-animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.productDetailImage:hover {
+  transform: scale(1.5);
+  transition: all 0.3s ease;
 }
 
 .arrows {
@@ -65,7 +69,6 @@
   justify-content: space-between;
   align-items: center;
   width: 95%;
-  /* margin-top: 20px; */
   position: absolute;
   top: 60%;
   left: 50%;
@@ -73,10 +76,8 @@
 }
 
 .arrow {
-  /* background-color: #f5f5f5; */
   width: 32px;
   height: 32px;
-  /* padding: 40px; */
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -289,19 +290,17 @@
 }
 
 .heartIcon {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   fill: #000;
   cursor: pointer;
-  /* margin-left: 10px; */
   transition: all 0.3s ease;
-  /* padding: 5px; */
   border-radius: 5px;
 }
 
 .heartIcon.favoriteIcon,
 .heartIcon:hover {
-  fill: #ff0000;
+  fill: gold;
 }
 
 .addToCartButton:hover,
