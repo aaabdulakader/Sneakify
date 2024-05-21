@@ -266,7 +266,7 @@ select {
   align-items: center;
   padding: 10px;
   border-top: 1px solid #ccc;
-  margin-top: auto;
+  margin-top: 10rem;
 }
 @keyframes slide-left {
   0% {
@@ -277,4 +277,16 @@ select {
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+.placeOrderBtn {
+  padding: 10px 20px;
+  margin-top: auto;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: #000;
 }

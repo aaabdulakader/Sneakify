@@ -86,8 +86,7 @@ function Checkout() {
     });
   };
 
-  // check if user is logged in by checking if jwt cookie is present in the browser cookie
-
+  // check if user is logged in by checking if jwt cookie is present in the browser cookies
   useEffect(() => {
     if (!document.cookie.includes("jwt")) {
       return (window.location.href = "/login");
@@ -115,31 +114,9 @@ function Checkout() {
     fetchUser();
     fetchCart();
   }, [currentUser._id]);
-
+  const tax = 0.05;
   const subtotal = cartitems.reduce((acc, item) => acc + item.price, 0);
-  const total = subtotal + subtotal * 0.05;
-
-  //   console.log(user.shipping_addresses);
-  //   console.log(showForm);
-
-  //   if (user.shipping_addresses?.length === 0) {
-  //     setShowForm(true);
-  //   }
-
-  //   console.log(selectedAddress);
-  // example:
-
-  // const shipping_ddress = {
-  //   firstName: "John",
-  //   lastName: "Doe",
-  //   street: "1234 Main St",
-  //   city: "Minneapolis",
-  //   state: "MN",
-  //   zip: "55401",
-  //   country: "USA",
-  //   phone: "123-456-7890",
-  //   isDefault: true,
-  // };
+  const total = subtotal + subtotal * tax;
 
   const handleSaveAddress = () => {
     // comparing the selected address with the user's shipping addresses
@@ -194,41 +171,70 @@ function Checkout() {
           });
       }
     }
-
-    // if the selected address is in the user's shipping addresses
-    // update the selected address
-    // else add the selected address to the user's shipping addresses
-
-    // fetch(`http://localhost:9000/users/${user._id}`, {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     shipping_addresses: [...user.shipping_addresses, shipping_address],
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setUser(data.documents);
-    //   });
   };
 
-  //   console.log(user);
+  const handleCheckout = () => {
+    const items = cartitems.map((item) => ({
+      product_id: item.product,
+      name: item.title,
+      quantity: item.quantity,
+      image: item.image,
+      tax,
+    }));
 
-  // if (showDefault && user.shipping_addresses) {
-  //   user.shipping_addresses = user.shipping_addresses.filter(
-  //     (address) => address.isDefault
-  //   );
-  // } else {
-  //   user.shipping_addresses = user.shipping_addresses;
-  // }
+    fetch("http://localhost:9000/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: user._id,
+        items,
+      }),
+    })
+      .then((response) => response.json())
+      .then(({ link, items, status, user }) => {
+        makeOrder({
+          user,
+          items,
+          payment_method: "card",
+        });
+        // open a blan
+        window.open(link, "_blank");
+
+        console.log(link, status);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const makeOrder = async (order) => {
+    const response = await fetch(
+      `http://localhost:9000/users/${order.user}/orders`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order),
+      }
+    ).then((response) => response.json());
+    console.log(response);
+
+    // clear cart
+    const response2 = await fetch(
+      `http://localhost:9000/users/${order.user}/cart`,
+      {
+        method: "DELETE",
+      }
+    ).then((response) => response.json());
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.checkout}>
         {/* saved address */}
-
         <div className={styles.forms}>
           <h2 className={styles.h2}>Shipping Information</h2>
           {user.shipping_addresses && !showForm && (
@@ -450,32 +456,6 @@ function Checkout() {
               </>
             )}
           </div>
-
-          {/* payment method */}
-          <h2 className={styles.h2}>Payment Method</h2>
-          <div className={styles.paymentMethod}>
-            <div className={styles.payment}>
-              <label htmlFor="creditCard" className={styles.paymentLabel}>
-                Credit Card
-              </label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                id="creditCard"
-                value="creditCard"
-                // onChange={(e) => console.log(e.target.value)}
-              />
-            </div>
-            <div className={styles.payment}>
-              <label htmlFor="paypal">PayPal</label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                id="paypal"
-                value="paypal"
-              />
-            </div>
-          </div>
         </div>
         <div className={styles.order}>
           <h2 className={styles.h2}>Order Summary</h2>
@@ -509,7 +489,12 @@ function Checkout() {
               {cartitems &&
                 cartitems.reduce((acc, item) => acc + item.price, 0)}
             </p>
-            <button className={styles.placeOrderBtn}>Place Order</button>
+            <button
+              onClick={() => handleCheckout()}
+              className={styles.placeOrderBtn}
+            >
+              Place Order
+            </button>
           </div>
         </div>
       </div>

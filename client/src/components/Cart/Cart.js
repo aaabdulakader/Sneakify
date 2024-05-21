@@ -160,6 +160,66 @@ function Cart() {
         return acc + +item.quantity;
       }, 0)
     : 0;
+  const tax = 0.05;
+
+  const handleCheckout = () => {
+    const items = cartitems.map((item) => ({
+      product_id: item.product,
+      name: item.title,
+      quantity: item.quantity,
+      image: item.image,
+      tax,
+    }));
+
+    fetch("http://localhost:9000/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: user._id,
+        items,
+      }),
+    })
+      .then((response) => response.json())
+      .then(({ link, items, status, user }) => {
+        makeOrder({
+          user,
+          items,
+          payment_method: "card",
+        });
+        // open a blan
+        window.open(link, "_blank");
+
+        console.log(link, status);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const makeOrder = async (order) => {
+    const response = await fetch(
+      `http://localhost:9000/users/${order.user}/orders`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order),
+      }
+    ).then((response) => response.json());
+    console.log(response);
+
+    // clear cart
+    const response2 = await fetch(
+      `http://localhost:9000/users/${order.user}/cart`,
+      {
+        method: "DELETE",
+      }
+    ).then((response) => response.json());
+    console.log(response2);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.cart}>
@@ -218,15 +278,18 @@ function Cart() {
             </p>
           </div>
 
-          <Link to="/checkout">
-            <button
-              className={styles.checkoutButton}
-              disabled={totalQuantity === 0}
-              onClick={() => setClicked(true)}
-            >
-              Proceed to Checkout
-            </button>
-          </Link>
+          {/* <Link to="/checkout"> */}
+          <button
+            className={styles.checkoutButton}
+            disabled={totalQuantity === 0}
+            onClick={() => {
+              setClicked(true);
+              handleCheckout();
+            }}
+          >
+            Proceed to Checkout
+          </button>
+          {/* </Link> */}
         </div>
       </div>
       <MightLike cartitems={cartitems} />
