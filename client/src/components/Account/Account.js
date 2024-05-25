@@ -35,8 +35,12 @@ const Sidebar = () => {
           }
           onClick={() => setSelectedTab("userInfo")}
         >
-          <CgProfile className={styles.tabIcon} />
-          {showTab && <Link to="/account/userInfo">User info</Link>}
+          {showTab && (
+            <Link to="/account/userInfo" className={styles.tabLink}>
+              <CgProfile className={styles.tabIcon} />
+              User info
+            </Link>
+          )}
         </li>
         <li
           className={
@@ -46,8 +50,12 @@ const Sidebar = () => {
           }
           onClick={() => setSelectedTab("favorites")}
         >
-          <MdFavoriteBorder className={styles.tabIcon} />
-          {showTab && <Link to="/account/favorites">Favorites</Link>}
+          {showTab && (
+            <Link to="/account/favorites" className={styles.tabLink}>
+              <MdFavoriteBorder className={styles.tabIcon} />
+              Favorites
+            </Link>
+          )}
         </li>
         <li
           className={
@@ -55,8 +63,12 @@ const Sidebar = () => {
           }
           onClick={() => setSelectedTab("orders")}
         >
-          <BiBox className={styles.tabIcon} />
-          {showTab && <Link to="/account/orders">Orders</Link>}
+          {showTab && (
+            <Link to="/account/orders" className={styles.tabLink}>
+              <BiBox className={styles.tabIcon} />
+              Orders
+            </Link>
+          )}
         </li>
       </ul>
     </div>
@@ -65,7 +77,14 @@ const Sidebar = () => {
 
 const Account = () => {
   // get current user
-  const userId = JSON.parse(localStorage.getItem("currentUser"))._id;
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (!currentUser) {
+    window.location.href = "/login";
+  }
+
+  const userId = currentUser._id;
+
   const [user, setUser] = useState({});
   useEffect(() => {
     fetch(`http://localhost:9000/users/${userId}`)
@@ -106,12 +125,5 @@ const Account = () => {
   );
 };
 
-// const Account = () => {
-//   return (
-//     <div className={styles.accountPage}>
-//       <AccountSidebar />
-//     </div>
-//   );
-// };
 
 export default Account;

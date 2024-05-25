@@ -289,9 +289,10 @@ function Checkout() {
           {showForm && (
             <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
               <div className={styles.formGroup}>
-                <label htmlFor="firstName">
+                <label className={styles.label} htmlFor="firstName">
                   First Name
                   <input
+                    className={styles.input}
                     type="text"
                     id="firstName"
                     name="firstName"
@@ -300,9 +301,10 @@ function Checkout() {
                     onChange={(e) => handleOnChange(e)}
                   />
                 </label>
-                <label htmlFor="lastName">
+                <label className={styles.label} htmlFor="lastName">
                   Last Name
                   <input
+                    className={styles.input}
                     type="text"
                     id="lastName"
                     name="lastName"
@@ -314,9 +316,10 @@ function Checkout() {
               </div>
 
               <div className={styles.formGroup}>
-                <label htmlFor="email">
+                <label className={styles.label} htmlFor="email">
                   Email
                   <input
+                    className={styles.input}
                     type="email"
                     id="email"
                     value={editing && shipping_address.email}
@@ -324,9 +327,10 @@ function Checkout() {
                     onChange={(e) => handleOnChange(e)}
                   />
                 </label>
-                <label htmlFor="phone">
+                <label className={styles.label} htmlFor="phone">
                   Phone
                   <input
+                    className={styles.input}
                     type="text"
                     id="phone"
                     name="phone"
@@ -337,9 +341,10 @@ function Checkout() {
                 </label>
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="street">
+                <label className={styles.label} htmlFor="street">
                   Street
                   <input
+                    className={styles.input}
                     type="text"
                     id="street"
                     name="street"
@@ -350,9 +355,10 @@ function Checkout() {
                 </label>
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="city">
+                <label className={styles.label} htmlFor="city">
                   City{" "}
                   <input
+                    className={styles.input}
                     type="text"
                     id="city"
                     name="city"
@@ -361,7 +367,7 @@ function Checkout() {
                     onChange={handleOnChange}
                   />
                 </label>
-                <label htmlFor="state">
+                <label className={styles.label} htmlFor="state">
                   State{" "}
                   <select
                     //   dropdown
@@ -377,9 +383,10 @@ function Checkout() {
                     ))}
                   </select>
                 </label>
-                <label htmlFor="zip">
+                <label className={styles.label} htmlFor="zip">
                   Zip{" "}
                   <input
+                    className={styles.input}
                     type="text"
                     id="zip"
                     name="zip"
@@ -390,9 +397,10 @@ function Checkout() {
                 </label>
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="country">
+                <label className={styles.label} htmlFor="country">
                   Country{" "}
                   <input
+                    className={styles.input}
                     type="text"
                     id="country"
                     name="country"
@@ -404,8 +412,11 @@ function Checkout() {
               </div>
 
               <div className={styles.formGroup + " " + styles.default}>
-                <label htmlFor="isDefault">Set as default address</label>
+                <label className={styles.label} htmlFor="isDefault">
+                  Set as default address
+                </label>
                 <input
+                  className={styles.input}
                   type="checkbox"
                   id="isDefault"
                   name="isDefault"

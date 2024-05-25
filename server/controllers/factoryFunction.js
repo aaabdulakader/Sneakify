@@ -76,9 +76,19 @@ exports.getCart = (Model) =>
   catchAsync(async (req, res, next) => {
     const document = await Model.find({ user: req.params.id });
 
+    console.log(document);
     if (!document) {
       return next(`No ${Model.modelName} found with that ID`);
     }
+
+    if (document.length === 0) {
+      return res.status(200).json({
+        status: "success",
+        user: null,
+        cart: null,
+      });
+    }
+
     res.status(200).json({
       status: "success",
       user: document[0].user,

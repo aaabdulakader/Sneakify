@@ -1,31 +1,22 @@
 import { React, useState, useEffect } from "react";
+import { useFetch } from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
-
 import styles from "./ProductDetail.module.css";
 
 // icons
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
-
-import { IoIosStar } from "react-icons/io";
-import { IoIosStarOutline } from "react-icons/io";
-
-import { FaMinus } from "react-icons/fa6";
-import { FaPlus } from "react-icons/fa6";
-
-import { Alert } from "../index";
-
+import { IoIosStar, IoIosStarOutline } from "react-icons/io";
+import { FaMinus, FaPlus } from "react-icons/fa6";
 import {
   IoIosArrowRoundForward,
   IoIosArrowRoundBack,
   IoIosArrowDown,
   IoIosArrowUp,
 } from "react-icons/io";
-import { set } from "mongoose";
 
 // pop up component after adding to cart
-
 const AddedToCart = ({ product, size, color, quantity }) => {
   return (
     <div className={styles.addedToCart}>
@@ -60,12 +51,12 @@ function ProductDetail() {
   const [cartItems, setCartItems] = useState([]);
   const [alert, setAlert] = useState({ message: "", type: "" });
   const [addedToCart, setAddedToCart] = useState(false);
-  // JSON.parse(localStorage.getItem("curretProduct"))
-  //   const user = JSON.parse(localStorage.getItem("currentUser"))._id;
-  //   const link = `http://localhost:9000/users/${user}/cart`;
 
   let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  let userId = currentUser._id;
+  let userId;
+  if (currentUser) {
+    userId = currentUser._id;
+  }
 
   const [favorites, setFavorites] = useState([]);
   const [user, setUser] = useState();
@@ -112,6 +103,11 @@ function ProductDetail() {
   // handle favorite
   const handleFavorite = () => {
     const link = `http://localhost:9000/users/${userId}/favorites/${product._id}`;
+
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
 
     if (isFavorited) {
       request("DELETE", link).then((data) => {
@@ -161,7 +157,6 @@ function ProductDetail() {
 
   const handleAddToCart = () => {
     if (!user) {
-      localStorage.setItem("currentProduct", JSON.stringify(product));
       window.location.href = "/login";
       return;
     }

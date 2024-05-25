@@ -14,11 +14,9 @@ html {
   text-align: center;
   position: relative;
   min-width: fit-content;
-  overflow-x: hidden;
-
-  /* height: 100vh; */
+  overflow: hidden;
   background-color: #f8f7f5;
-  /* padding: 20px; */
+  width: 100vw;
 }
 
 @media screen and (max-width: 450px) {

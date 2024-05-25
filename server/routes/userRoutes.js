@@ -1,6 +1,11 @@
 const express = require("express");
 const { testMiddleware } = require(`${__dirname}/../test/test.js`);
-const { signUp, login, secure } = require("../controllers/Authentication");
+const {
+  signUp,
+  login,
+  secure,
+  limit,
+} = require("../controllers/Authentication");
 const Cart = require("../models/cartModel");
 
 const {
@@ -24,8 +29,10 @@ const {
 } = require("../controllers/userController");
 
 const router = express.Router();
-
-router.route("/").get(secure, getAllUsers, testMiddleware).post(signUp);
+router
+  .route("/")
+  .get(secure, limit("admin"), getAllUsers, testMiddleware)
+  .post(signUp);
 router.route("/cart").get(getAllCarts).delete(deleteAll);
 router
   .route("/:id/cart")

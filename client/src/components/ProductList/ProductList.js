@@ -11,9 +11,6 @@ function ProductList({ gender }) {
   const [showFilter, setShowFilter] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const productList = document.querySelector(".productList");
-  console.log(productList);
-
   const link = "http://localhost:9000/products/";
 
   useEffect(() => {
@@ -264,9 +261,9 @@ function ProductList({ gender }) {
       </div>
 
       {/* show more button */}
-      <button className={styles.showMoreButton} onClick={handleShowMore}>
+      {/* <button className={styles.showMoreButton} onClick={handleShowMore}>
         Show More
-      </button>
+      </button> */}
     </div>
   );
 }

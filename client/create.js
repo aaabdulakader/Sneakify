@@ -59,8 +59,7 @@ function createComponent(componentNames) {
 
     fs.mkdirSync(componentDir, { recursive: true });
 
-    let cssVariableName =
-      component[0].toLowerCase() + component.slice(1) + "Styles";
+    let cssVariableName = "styles";
 
     fs.writeFileSync(
       componentFileJS,

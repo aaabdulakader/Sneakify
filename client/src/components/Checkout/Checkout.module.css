@@ -51,7 +51,7 @@
   margin-bottom: 10px;
   width: 100%;
 }
-label {
+.label {
   display: flex;
   flex-direction: column;
   font-size: 16px;
@@ -59,14 +59,14 @@ label {
   text-align: left;
   width: 100%;
 }
-label,
-input,
+.label,
+.input,
 select {
   cursor: pointer;
   outline: none;
   border-radius: 5px;
 }
-input,
+.input,
 select {
   padding: 10px;
   border: 1px solid #ccc;

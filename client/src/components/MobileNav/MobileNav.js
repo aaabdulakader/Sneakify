@@ -1,59 +1,63 @@
-import { React, useState, useEffect } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
+import useIsLoggedIn from "../../hooks/useIsLoggedIn";
 import { Link } from "react-router-dom";
-
 import styles from "./MobileNav.module.css";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
-function MobileNav({ onClose, isMobileMenuOpen, logout }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Check if the user is logged in when the component mounts
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists, false otherwise
-  }, []);
+const MobileNav = ({ onClose, active, logout }) => {
+  const isLoggedIn = useIsLoggedIn();
+  const navRef = useOutsideClick(onClose);
 
   const handleLogout = async () => {
     const logOutLink = "http://localhost:9000/logout";
 
-    await fetch(logOutLink, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      jwt: localStorage.getItem("token"),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.status === "success") {
-          logout();
-        } else {
-          alert("Error logging out");
-        }
+    try {
+      const response = await fetch(logOutLink, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
+      const data = await response.json();
+      if (data.status === "success") {
+        logout();
+      } else {
+        alert("Error logging out");
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+      alert("Error logging out");
+    }
   };
 
   return (
-    <nav className={styles.mobileNav} area-label="Mobile Navigation">
-      <ul className={styles.mobileNavList} onClick={onClose}>
+    <nav
+      ref={navRef}
+      className={styles.mobileNav}
+      aria-label="Mobile Navigation"
+    >
+      <ul
+        className={styles.mobileNavList}
+        aria-label="Mobile Navigation List"
+        onClick={onClose}
+      >
         <li>
-          <Link className={styles.mobileNavLink} to="/" area-label="Home">
+          <Link className={styles.mobileNavLink} to="/" aria-label="Home">
             Home
           </Link>
         </li>
         <li>
-          <Link className={styles.mobileNavLink} to="/men" aria-label="men">
+          <Link className={styles.mobileNavLink} to="/men" aria-label="Men">
             Men
           </Link>
         </li>
         <li>
-          <Link className={styles.mobileNavLink} to="/women" area-label="Women">
+          <Link className={styles.mobileNavLink} to="/women" aria-label="Women">
             Women
           </Link>
         </li>
         <li>
-          <Link className={styles.mobileNavLink} to="/kids" area-label="Kids">
+          <Link className={styles.mobileNavLink} to="/kids" aria-label="Kids">
             Kids
           </Link>
         </li>
@@ -61,7 +65,7 @@ function MobileNav({ onClose, isMobileMenuOpen, logout }) {
           <Link
             className={styles.mobileNavLink}
             to="/products"
-            area-label="Products"
+            aria-label="Products"
           >
             Products
           </Link>
@@ -70,7 +74,7 @@ function MobileNav({ onClose, isMobileMenuOpen, logout }) {
           <Link
             className={styles.mobileNavLink}
             to="/contact"
-            area-label="Contact"
+            aria-label="Contact"
           >
             Contact
           </Link>
@@ -78,19 +82,18 @@ function MobileNav({ onClose, isMobileMenuOpen, logout }) {
         <li>
           <Link
             className={styles.mobileNavLink}
-            to={isLoggedIn ? "/account" : "/login"}
-            area-label="Login"
+            to={isLoggedIn ? "/account/userInfo" : "/login"}
+            aria-label="Login"
           >
             {isLoggedIn ? "My Account" : "Login"}
           </Link>
         </li>
-
         {isLoggedIn && (
           <li>
             <Link
               className={styles.mobileNavLink}
               to="/"
-              area-label="Logout"
+              aria-label="Logout"
               onClick={handleLogout}
             >
               Logout
@@ -100,6 +103,6 @@ function MobileNav({ onClose, isMobileMenuOpen, logout }) {
       </ul>
     </nav>
   );
-}
+};
 
 export default MobileNav;

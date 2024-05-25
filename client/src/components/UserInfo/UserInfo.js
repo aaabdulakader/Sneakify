@@ -80,9 +80,7 @@ function UserInfo({ user }) {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-        </div>
-        {/* phone */}
-        <div className={styles.formGroup}>
+
           <label htmlFor="phone" className={styles.label}>
             Phone
             <input

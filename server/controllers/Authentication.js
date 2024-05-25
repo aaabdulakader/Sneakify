@@ -34,17 +34,15 @@ const login = async (req, res, next) => {
     "+password"
   );
 
-  console.log(user);
-
   if (!req.body.password || !req.body.email) {
-    res.status(400).json({
+    return res.status(400).json({
       status: "fail",
       message: "Please provide email and password!",
     });
   }
 
   if (!user || !(await bycrypt.compare(req.body.password, user.password))) {
-    res.status(401).json({
+    return res.status(401).json({
       status: "fail",
       message: "Incorrect email or password!",
     });
@@ -58,6 +56,7 @@ const secure = async (req, res, next) => {
   //   req.headers.authorization.startsWith("Bearer") &&
   //   (token = req.headers.authorization.split(" ")[1]);
 
+  console.log(req.headers.authorization, "authorization");
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -92,7 +91,15 @@ const secure = async (req, res, next) => {
 
   next();
 };
-
+const limit = (role) => (req, res, next) => {
+  if (req.user.role !== role) {
+    return res.status(403).json({
+      status: "fail",
+      message: "You are not allowed to perform this action!",
+    });
+  }
+  next();
+};
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -137,4 +144,4 @@ const sendToken = (user, statusCode, res) => {
   });
 };
 
-module.exports = { signUp, login, secure };
+module.exports = { signUp, login, secure, limit };
