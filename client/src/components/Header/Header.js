@@ -1,7 +1,9 @@
 import { React, useRef, useState, useEffect } from "react";
+import useIsLoggedIn from "../../hooks/useIsLoggedIn";
 
-import headerStyles from "./Header.module.css";
+import styles from "./Header.module.css";
 import { MobileNav } from "../index.js";
+import { SearchProduct } from "../index.js";
 
 // icons
 import { BsCart3 } from "react-icons/bs";
@@ -11,11 +13,14 @@ import { RiAccountCircleLine } from "react-icons/ri";
 import { IoMenuOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
-// import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
+import useFetch from "../../hooks/useFetch";
+
+// hooks
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 const ProfileDropdown = ({ logout, setDropdown }) => {
   return (
-    <div className={headerStyles.profileDropdown}>
+    <div>
       <Link
         to="/account/userInfo"
         area-label="Account"
@@ -46,10 +51,11 @@ const ProfileDropdown = ({ logout, setDropdown }) => {
 
 function Header({ logout }) {
   // States
-  //   const [products, setProducts] = React.useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useIsLoggedIn();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [searchActive, setSearchActive] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   let cart = JSON.parse(localStorage.getItem("cart"));
   const count = cart?.reduce((acc, item) => {
@@ -59,61 +65,68 @@ function Header({ logout }) {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-  // const checklogin = () =>
-  useEffect(() => {
-    // check the presence of a cookie named jwt
-    const token = document.cookie.includes("jwt");
-    setIsLoggedIn(!!token); // Set isLoggedIn to true if token exists, false otherwise
-  }, []);
 
   const handleDropdown = () => {
     setShowProfileDropdown(!showProfileDropdown);
   };
 
-  // console.log(isLoggedIn);
+  const { data, error, loading } = useFetch("http://localhost:9000/products/");
+  const [products, setProducts] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setProducts(data.documents);
+    }
+  }, [data]);
+
+  const handleSearch = () => {
+    if (searchValue === "") {
+      setSearchResults([]);
+
+      return;
+    }
+    const results = products.filter((product) =>
+      product.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    setSearchResults(results);
+  };
+
+  const dropdownRef = useOutsideClick(() => setShowProfileDropdown(false));
+  const searchRef = useOutsideClick(() => setSearchActive(false));
+
   return (
-    <header className={headerStyles.header}>
-      <div className={headerStyles.container}>
-        {/* Logo */}
+    <header className={styles.header}>
+      <div className={styles.container}>
         <Link to="/" area-label="Home">
-          <GiRunningShoe className={headerStyles.logo} />
+          <GiRunningShoe className={styles.logo} />
         </Link>
-        <nav
-          className={headerStyles.nav + " mobileMenu"}
-          area-label="Navigation"
-        >
-          <ul className={headerStyles.navList}>
+        <nav className={styles.nav + " mobileMenu"} area-label="Navigation">
+          <ul className={styles.navList}>
             <li>
-              <Link className={headerStyles.navLink} to="/" area-label="Home">
+              <Link className={styles.navLink} to="/" area-label="Home">
                 Home
               </Link>
             </li>
             <li>
-              <Link className={headerStyles.navLink} to="/men" area-label="Men">
+              <Link className={styles.navLink} to="/men" area-label="Men">
                 Men
               </Link>
             </li>
             <li>
-              <Link
-                className={headerStyles.navLink}
-                to="/women"
-                area-label="Women"
-              >
+              <Link className={styles.navLink} to="/women" area-label="Women">
                 Women
               </Link>
             </li>
             <li>
-              <Link
-                className={headerStyles.navLink}
-                to="/kids"
-                area-label="Kids"
-              >
+              <Link className={styles.navLink} to="/kids" area-label="Kids">
                 Kids
               </Link>
             </li>
             <li>
               <Link
-                className={headerStyles.navLink}
+                className={styles.navLink}
                 to="/products"
                 area-label="Products"
               >
@@ -123,47 +136,77 @@ function Header({ logout }) {
           </ul>
         </nav>
         {/* Login link or Profile Icon */}
-        <div className={headerStyles.rightNav} area-label="Right Navigation">
+        <div className={styles.rightNav} area-label="Right Navigation">
           {/* Search */}
-          <div className={headerStyles.search}>
+          <div
+            styles={{ display: searchActive ? "block" : "none" }}
+            className={
+              styles.searchBox +
+              " " +
+              (searchActive && searchValue !== "" && styles.searchActive)
+            }
+            area-label="Search"
+            ref={searchRef}
+          >
             <input
               type="text"
               placeholder="Search"
-              className={headerStyles.searchInput}
+              className={styles.searchInput}
               id="search"
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+                handleSearch();
+                searchValue !== ""
+                  ? setSearchActive(true)
+                  : setSearchActive(false);
+              }}
             />
-            {/* <IoIosSearch className={headerStyles.searchIcon} /> */}
+
+            {searchActive && searchResults.length > 0 && searchValue !== "" && (
+              <div
+                className={styles.searchResults}
+                area-label="Search Results"
+                onClick={() => setSearchActive(false)}
+              >
+                {searchResults.map(
+                  (product, i) =>
+                    i < 5 && (
+                      <SearchProduct key={product._id} product={product} />
+                    )
+                )}
+              </div>
+            )}
+
+            {/* <IoIosSearch className={styles.searchIcon} /> */}
           </div>
           {isLoggedIn ? (
             <Link area-label="Profile">
               <RiAccountCircleLine
-                className={headerStyles.profileIcon}
+                className={styles.profileIcon}
                 onClick={() => handleDropdown()}
                 // onMouseLeave={() => handleDropdown()}
               />
             </Link>
           ) : (
-            <Link className={headerStyles.navLink} to="/login">
+            <Link className={styles.navLink} to="/login">
               Login
             </Link>
           )}
 
-          <Link className={headerStyles.cartIcon} to="/cart" area-label="Cart">
-            <BsCart3 className={headerStyles.cartLogo} />
-            {count !== 0 && (
-              <span className={headerStyles.cartCount}>{count}</span>
-            )}
+          <Link className={styles.cartIcon} to="/cart" area-label="Cart">
+            <BsCart3 className={styles.cartLogo} />
+            {count !== 0 && <span className={styles.cartCount}>{count}</span>}
           </Link>
 
           {isMobileMenuOpen ? (
             <IoCloseOutline
               onClick={toggleMobileMenu}
-              className={headerStyles.menuIconClose}
+              className={styles.menuIconClose}
             />
           ) : (
             <IoMenuOutline
               onClick={toggleMobileMenu}
-              className={headerStyles.menuIcon}
+              className={styles.menuIcon}
             />
           )}
 
@@ -181,10 +224,12 @@ function Header({ logout }) {
         </div>
 
         {showProfileDropdown && (
-          <ProfileDropdown
-            logout={logout}
-            setDropdown={setShowProfileDropdown}
-          />
+          <div ref={dropdownRef} className={styles.profileDropdown}>
+            <ProfileDropdown
+              logout={logout}
+              setDropdown={setShowProfileDropdown}
+            />
+          </div>
         )}
       </div>
     </header>
