@@ -87,16 +87,16 @@ orderSchema.pre("save", function (next) {
 //   next();
 // });
 
-// orderSchema.pre("save", function (next) {
-//   let total = 0;
-//   this.items.forEach((item) => {
-//     item.subtotal = item.price * item.quantity;
-//     total += item.subtotal;
+orderSchema.pre("save", function (next) {
+  let total = 0;
+  this.items.forEach((item) => {
+    item.subtotal = item.price * item.quantity;
+    total += item.subtotal;
 
-//     this.total_amount = total + total * 0.05;
-//   });
-//   next();
-// });
+    this.total_amount = total + total * 0.05;
+  });
+  next();
+});
 
 // populate the product_id field with the product details
 orderSchema.pre(/^find/, function (next) {

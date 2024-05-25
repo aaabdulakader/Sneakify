@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { Product } from "./../index.js";
+import { Product, MightLike } from "./../index.js";
 
 import styles from "./Favorites.module.css";
 import { px } from "framer-motion";
@@ -28,6 +28,7 @@ function Favorites() {
         <h1 className={styles.title}>Favorites</h1>
 
         <div className={styles.favorites}>
+          {favorites.length <= 0 ? "No items in favorites" : ""}
           {favorites.map((product) => (
             <Product
               key={product._id}

@@ -1,6 +1,8 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
+
+import useIsLoggedIn from "../../hooks/useIsLoggedIn";
 
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
@@ -8,6 +10,8 @@ import { FaInstagram } from "react-icons/fa";
 import { GiRunningShoe } from "react-icons/gi";
 
 function Footer() {
+  const loggedIn = useIsLoggedIn();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footerLogo}>
@@ -31,15 +35,20 @@ function Footer() {
         <Link to="/products" className={styles.footerLink}>
           PRODUCTS
         </Link>
-        <Link to="/account" className={styles.footerLink}>
-          ACOUNT
-        </Link>
-        <Link to="/account/favorites" className={styles.footerLink}>
-          FAVORITES
-        </Link>
-        <Link to="/account/orders" className={styles.footerLink}>
-          ORDERS
-        </Link>
+        {loggedIn && (
+          <>
+            {" "}
+            <Link to="/account" className={styles.footerLink}>
+              ACOUNT
+            </Link>
+            <Link to="/account/favorites" className={styles.footerLink}>
+              FAVORITES
+            </Link>
+            <Link to="/account/orders" className={styles.footerLink}>
+              ORDERS
+            </Link>
+          </>
+        )}
       </div>
       <div className={styles.socialLinks}>
         <a href="https://www.facebook.com" className={styles.socialLink}>
