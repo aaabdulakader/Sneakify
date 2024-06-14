@@ -14,10 +14,6 @@ Deployment Tools
 Contributors
 
 
-Project Overview
-
-Sneakify provides a comprehensive online shopping platform for sneakers. Users can browse through a curated collection of sneakers, filter by categories, sizes, and colors, add items to their cart, and proceed to checkout securely. Admins can manage products and orders through an intuitive dashboard.
-
 ![Sneakify Banner](https://sneakify-14bef41e043b.herokuapp.com/favicon2.png)
 
 
@@ -59,27 +55,6 @@ Postman: Used for testing and documenting APIs.
 ESLint: Ensures code quality and adherence to coding standards.
 Prettier: Enforces consistent code formatting.
 
-Project Structure
-
-sneakify/
-├── client/               # React frontend
-│   ├── public/
-│   └── src/
-│       ├── components/   # Reusable components
-│       ├── pages/        # Main pages
-│       ├── App.js        # Main App component
-│       ├── index.js      # Entry point
-│       └── ...           # More configuration and utilities
-
-├── server/               # Node.js backend
-│   ├── controllers/      # Route controllers
-│   ├── models/           # Mongoose models
-│   ├── routes/           # API routes
-│   ├── data/             # JSON Data files
-│   ├── config/           # Configuration files
-│   └── server.js         # Server entry point
-├── .gitignore
-└── README.md
 
 Deployment Tools
 
