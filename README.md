@@ -5,12 +5,12 @@ Sneakify is a modern e-commerce web application designed for sneaker enthusiasts
 
 ## Table of Contents
 
--Project Overview 
--Demo
--Features
--Technologies Used
--Deployment Tools
--Contributors
+- Project Overview 
+- Demo
+- Features
+- Technologies Used
+- Deployment Tools
+- Contributors
 
 
 ![Sneakify Banner](https://sneakify-14bef41e043b.herokuapp.com/favicon2.png)
