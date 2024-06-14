@@ -5,7 +5,7 @@ Sneakify is a modern e-commerce web application designed for sneaker enthusiasts
 
 ## Table of Contents
 
-Project Overview
+Project Overview 
 Demo
 Features
 Technologies Used
