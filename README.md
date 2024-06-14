@@ -22,10 +22,10 @@ Sneakify is a modern e-commerce web application designed for sneaker enthusiasts
 
 ## Features
 
-Product Browsing: Explore a wide range of sneakers with filtering options.
-Shopping Cart: Add, remove, and adjust quantities of products in the cart.
-User Authentication: Register, log in, and manage profiles securely.
-Order Management: Complete and review orders through a secure checkout process.
+- Product Browsing: Explore a wide range of sneakers with filtering options.
+- Shopping Cart: Add, remove, and adjust quantities of products in the cart.
+- User Authentication: Register, log in, and manage profiles securely.
+- Order Management: Complete and review orders through a secure checkout process.
 
 ## Technologies Used
 
